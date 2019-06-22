@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Les dés</title>
+    <link rel="stylesheet" type="text/css" href="themes.css" />
+  </head>
+  <body>
+    <div id="main">
+    <h1>Somme d'un lancer de dés</h1>
+    <p>
+      Présentation du jeu...
+    </p>
+    <form >
+      <label for="nbde">Nombre de dés (jusqu'à 7 dés):</label>
+      <select class="" name="nbde" id="nbde">
+          <option val="1" >1</option>
+          <option val="2" >2</option>
+          <option val="3" >3</option>
+          <option val="4" >4</option>
+          <option val="5" >5</option>
+          <option val="6" >6</option>
+          <option val="7" >7</option>
+      </select>
+      <label for="rep">Séries de n lancers:</label>
+      <input type="text" class="" name="rep" id="rep"></input>
+      <button id="lancer">Lancer les dés</button>
+    </form>
+
+
+  <ul id="mesdes">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <canvas id="graphe">
+  </canvas>
+  </div>
+  <div id="resultats">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Somme des
+          </th>
+          <th>
+            Nombres
+          </th>
+          <th>
+            fréquences
+          </th>
+        </tr>
+      </thead>
+      <tbody id="donnees">
+      </tbody>
+    </table>
+  </div>
+  <script type="text/javascript">
+  var listenb = document.getElementById('nbde');
+  var rep = parseInt(document.getElementById('rep').value);
+  var ts = document.getElementById('mesdes').getElementsByTagName('li');
+  var tbody = document.getElementById('donnees');
+  var sommes=[];
+  var eff=[];
+  var freq=[];
+  var ancien = 1;
+  var demax = 1;
+
+  function intalea(min,max){
+      return  Math.floor(Math.random() * (max - min)) + min;
+    };
+  // Calcul les fréquences
+  function stat(){
+    if (eff.length>0){
+      T = 0;M=0;
+      for(i=0; i< eff.length; i++){
+        T += eff[i];
+      }
+      for(i=0; i< sommes.length; i++){
+        M = sommes[i]*eff[i];
+        freq[i] = eff[i]/T;
+      }
+      M = M/T;
+    }
+  }
+  // Affiche les résultats avec les fréquences
+  function aff(){
+    tbody.innerHTML = "\n";
+    stat();
+    for( d=0; d< sommes.length; d++ ){
+        tr = '<tr><td>'+sommes[d]+'</td><td>'+eff[d]+'</td><td>'+freq[d]+'</td></tr>';
+        tbody.innerHTML += tr;
+    };
+  };
+  // Affiche des cercles en fonction des fréquences
+  function graphe(){
+    var canvas = document.getElementById('graphe');
+    var ctx = canvas.getContext('2d');
+    couleur = ["#70CCC3","#26998D", "#A6FFC4","#FF66A5","#CC70C4"];
+    for (i = 0; i < freq.length;i++){
+      ctx.fillStyle = couleur[i%5];
+      ctx.beginPath();
+      x = intalea(0,640);
+      y = intalea(0,400);
+      r = Math.floor(freq[i]*80);
+      ctx.arc(x, y, r,0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.fill();
+    };
+  };
+  // fonction appeler après avoir cliquer sur lancer
+  function jet_des(e){
+      ancien = demax;
+      rep = parseInt(document.getElementById('rep').value);
+      demax = parseInt(listenb.options[listenb.selectedIndex].value);
+      if (ancien != demax){
+        sommes=[];
+        eff=[];
+        freq=[];
+      }
+      // Efface les dés inutiles
+      for (i = demax ; i < ts.length; i++ ){
+        ts[i].setAttribute("class", "cache");
+      };
+      // Affiche le résultat des dés - méthode des sprites
+      for(k = 0; k <rep; k++){
+        var S = 0;
+        for (i = 0 ; i< demax; i++ ){
+          n = intalea(1,6);
+          ts[i].setAttribute("class", "de"+n);
+          S = S+n;
+        };
+        // enregistrement des résultats
+        if (sommes.length > 0 && sommes.indexOf(S)>= 0){
+          eff[sommes.indexOf(S)] += 1;
+        }else{
+          sommes.push(S);
+          eff.push(1);
+        };
+        aff();
+        if (rep % 10 == 0){
+              graphe();
+        };
+      };
+  // Annulation de la navigation vers la cible du lien, sinon on va recharger
+  // la page
+   e.preventDefault();
+
+  };
+
+    var jouer = document.getElementById('lancer');
+    jouer.addEventListener("click",jet_des);
+
+    var resultat = 0;
+  </script>
+  </body>
+</html>
