@@ -1,0 +1,60 @@
+#mesdes{
+  display:flex;
+  flex-direction: row;
+  background-color: #3BD8FF;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#main{
+  width:90%;
+  min-width: 640px;
+  margin:auto;
+  margin-top: 0;
+  padding: 1em;
+  background-color: #fff;
+}
+body{background-color: #ececec;padding: 0}
+li {
+  color: #fff;
+  padding: 52px;
+  list-style: none;
+  margin-right: 10px;
+  background:url("img/des.png") no-repeat ;
+  background-position: -800px -3px;
+}
+.cache{
+  display: none;
+  color:#FFF;
+  background: #FF3399;
+}
+
+.de1{
+  background-position:0 -3px;
+}
+.de2{
+  background-position:-107px -3px;
+}
+.de3{
+  background-position:-214px -3px;
+}
+.de4{
+  background-position:-321px -3px;
+}
+.de5{
+  background-position:-428px -3px;
+}
+.de6{
+  background-position:-532px -3px;
+}
+table{
+  width:60%;
+  margin:auto;
+  margin-top:2em;}
+td{text-align: center;}
+tr:nth-child(odd){
+background-color:#EEE;
+}
+
+tr:nth-child(even){
+background-color:#CCC;
+}
