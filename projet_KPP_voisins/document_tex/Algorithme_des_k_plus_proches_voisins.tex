@@ -1,0 +1,625 @@
+\documentclass[10pt,lang=french]{scrartcl}
+\usepackage{fourier}
+\usepackage[scaled=0.87]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pifont}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2.5cm,lmargin=2cm,rmargin=2cm,headheight=2cm,headsep=0.8cm,footskip=1cm}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx,wrapfig,tikz,comment}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{hyperref}
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+   
+    % Document parameters
+    % Document title
+    \title{Algorithme des k plus proches voisins}
+    \author{P-P-P}
+
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+\usepackage{listings,lipsum,listingsutf8}
+\definecolor{codegreen}{rgb}{0.1,0.47,0.1}
+%initial : {0,0.6,0}
+%\definecolor{codeblue}{rgb}
+%20, 148, 20)
+\definecolor{fondjaune}{rgb}{0.99, 0.7,0.8}
+%255, 255, 153)
+%254, 191, 210
+\definecolor{couleurdef}{rgb}{0.99, 0.78, 0.85}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+    % remarque du 8/10 : accentuation qui marche si on travaille avec pyzo ou thonny, avec edupython, pb d'accents puis pas interprété par pdflatex+utf8
+   \usepackage[tikz]{bclogo}
+    
+   \lstset{literate=%
+        {è}{{\`e}}1
+        {à}{{\`a}}1
+        {é}{{\'e}}1
+        {ù}{{\`u}}1
+        {ê}{{\^e}}1
+        {É}{{\'E}}1 
+    }
+    \newcommand\monimage{\includegraphics[width=17pt]{logo_python.pdf}}
+    \newenvironment{code}{%
+        \begin{bclogo}[couleur=backcolour, couleurTexte=black ,couleurBord=blue ,couleurBarre=black, ombre=false,epBord=0.9,logo=\monimage,arrondi=0.1]{{\bfseries Code Python  :}}%
+        }%
+        {%
+        \end{bclogo}
+    }%
+  % \excludecomment{Verbatim}
+   
+    \begin{document}
+    
+    
+    \maketitle
+
+
+Le lien vers
+\href{https://openclassrooms.com/fr/courses/4011851-initiez-vous-au-machine-learning/4022441-tp-entrainez-le-modele-des-k-plus-proches-voisins-k-nn}{openclassroom}
+
+Celui vers le
+\href{http://www.grappa.univ-lille3.fr/~ppreux/ensg/miashs/l3-ap/tps/kppv/}{TP
+de l'université de Lille donné dans moodle}
+
+L'objectif de ce TP est de faire reconnaître automatiquement par
+l'ordinateur des chiffres manuscrits (pour lire des chèques, lire des
+codes postaux par exemple). \includegraphics{lettres.jpg}
+
+    \tableofcontents
+    
+\section{Le  jeu d'exemples}
+
+    \begin{wrapfigure}{r}{0.4\textwidth}
+    	\centering
+    		\includegraphics[width=0.38\textwidth]{extrait_MNIST2.png}
+    		\caption{\scriptsize Un extrait du type d'images du dataset MNIST}
+    \end{wrapfigure}
+    
+    Avant même d'implanter l'algorithme des \emph{k} plus proches voisins,
+    nous avons besoin d'exemples qui seront traités par l'algorithme. Aussi,
+    commençons par lire un jeu de données.
+    
+    Il s'agit d'un jeu de données très célèbre appelé MNIST. Il est
+    constitué d'un ensemble de 70000 images, 28x28 pixels, en noir et blanc
+    annoté du chiffre correspondant (entre 0 et 9). Ce jeu utilise des
+    données réelles qui ont déjà été pré-traitées pour être plus facilement
+    utilisables par un algorithme.
+    
+    
+    Le jeu de données est relativement petit mais pour l'algorithme des
+    \emph{k} plus proches voisins, il est déjà trop gros pour obtenir
+    rapidement des résultats. On va donc effectuer un échantillonnage et
+    travailler sur seulement 5000 données.
+
+
+\section{Déterminer le plus proche voisin d'un point}
+
+\subsection{Distance entre deux images}
+
+        Pour évaluer la différence entre deux images, on va définir une distance
+    entre deux images. Les images sont des images
+    \href{https://fr.wikipedia.org/wiki/Portable_pixmap\#Fichier_binaire_2}{PGM},
+    c'est à dire en niveau de gris.
+
+\begin{itemize}
+\tightlist
+\item
+  Pour tous les pixels de l'image on calcule la différence des valeurs
+  d'intensité, dont on supprime le signe (abs)
+\item
+  On somme toutes ces différences
+\end{itemize}
+\begin{center}
+        \begin{tikzpicture}
+                \clip(-2,2)rectangle(1,-1);
+                \node[inner sep=0pt] at (0,0) {
+                	\includegraphics[width=4cm]{m1doc.png}
+                };
+                \draw (-2,-2) grid (2,2);
+                \draw[color=white](-0.5,0.5)node{40};
+                \draw[color=white](-1.5,-1.5)node{40};
+                \draw[color=white](-1.5,0.5)node{0};
+                \draw[](0.5,-0.5)node{191};
+                \draw[](-0.5,-1.5)node{191};
+                \draw[](-1.5,1.5)node{255};
+        \end{tikzpicture}
+        \begin{tikzpicture}
+                \clip(-1,1)rectangle(2,-2);
+                \node[inner sep=0pt] at (0,0) {
+                	\includegraphics[width=4cm]{m2doc.png}
+                };
+                \draw (-2,-2) grid (2,2);
+                \draw[](-0.5,1.5)node{191};
+                \draw[](-1.5,0.5)node{191};
+                \draw[](1.5,0.5)node{191};
+                \draw[](0.5,-0.5)node{191};
+                \draw[](-0.5,0.5)node{255};
+        \end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Pour les deux images précédentes, déterminez la distance.
+\item
+  Écrire une fonction qui calcule la distance entre deux images. Une
+  image sera représentée comme une liste des valeurs de gris des pixels
+\end{enumerate}
+\begin{code}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k}{def} \PY{n+nf}{distance} \PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+        \PY{n}{somme} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{784}\PY{p}{)}\PY{p}{:}
+            \PY{n}{somme} \PY{o}{+}\PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} 
+        \PY{k}{return} \PY{n}{somme}
+\end{Verbatim}
+ \end{code}
+\subsection{Exemple d'utilisation}
+
+Nous allons calculer la distance entre quelques chiffres manuscrits.
+\begin{center}
+\begin{tabular}{|c|c|c|}
+	\hline 
+	image 1& image 2  & image 3  \\ 
+	\hline 
+	\includegraphics{ecrit1.png} &\includegraphics{ecrit2.png}   & \includegraphics{ecrit3.png}  \\ 
+	\hline 
+\end{tabular} 
+\end{center}
+On cherche à comparer la première image aux deux suivantes. Bien que
+nous voyons tout de suite le résultat, déterminer les distances.
+\begin{bclogo}[couleur=couleurdef, couleurTexte=black ,couleurBord=black ,couleurBarre=blue, ombre=false,epBord=0.9,logo=\bcbook,arrondi=0.1]{{\bfseries Librairie PIL}}
+    \begin{itemize}
+        \item ouvrir une image
+        \textbf{monimage = Image.open(nom\ du\ fichier)}
+        \item  Récuperer les valeurs des pixels
+        de notre image \textbf{monimage.getdata()}, il faut la transformer en
+        liste avec la commande \textbf{list(...)}
+        	\begin{itemize}
+            \item[\ding{227}] \texttt{from PIL import Image} 
+            \item[\ding{227}]\texttt{monimage = Image.open(nom\ du\ fichier)} 
+        \end{itemize}
+    \end{itemize}
+\end{bclogo}
+%    \begin{Verbatim}[commandchars=\\\{\}]
+%{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+%        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+%        
+%        \PY{n}{ecrit1} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ecrit1.pgm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+%        \PY{c+c1}{\PYZsh{} met l\PYZsq{}image dans un tableau qui est de dimension 784}
+%        \PY{n}{img1} \PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{ecrit1}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+%        
+%        \PY{n}{ecrit2} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ecrit2.pgm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+%        \PY{c+c1}{\PYZsh{} met l\PYZsq{}image dans un tableau qui est de dimension 784}
+%        \PY{n}{img1} \PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{ecrit1}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+%        
+%        \PY{n}{ecrit3} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ecrit3.pgm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+%        \PY{c+c1}{\PYZsh{} met l\PYZsq{}image dans un tableau qui est de dimension 784}
+%        \PY{n}{img1} \PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{ecrit1}\PY{o}{.}\PY{n}{getdata}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+%        
+%        \PY{n}{d12} \PY{o}{=} \PY{n}{distance}\PY{p}{(}\PY{n}{img1}\PY{p}{,}\PY{n}{img2}\PY{p}{)}
+%        \PY{n}{d13} \PY{o}{=} \PY{n}{distance}\PY{p}{(}\PY{n}{img1}\PY{p}{,}\PY{n}{img3}\PY{p}{)}
+%        
+%        \PY{k}{if} \PY{n}{d13}\PY{o}{\PYZlt{}}\PY{n}{d12}\PY{p}{:}
+%            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{image 1 est plus proche de l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{image de 3 que de l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{image 2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+%        \PY{k}{else}\PY{p}{:}
+%            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{image 1 est plus proche de l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{image de 2 que de l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{image 3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+%        \PY{n}{display}\PY{p}{(}\PY{n}{ecrit1}\PY{p}{)}
+%\end{Verbatim}
+
+\subsection{les k plus proches voisins}
+
+Sur le dessin ci-dessous nous avons représenté un chiffre dont on cherche à l'identifier. Pour cela nous allons déterminer à l'aide de la méthode des k-NN (k plus proches voisins).
+
+On cherche à déterminer les proches voisins du caractère entouré
+\begin{enumerate}
+    \item Déterminer les 3-plus proches voisins.
+    \item Déterminer les 6-plus proches voisins.
+\end{enumerate}
+\begin{tikzpicture}
+\draw[](-5,0)--(5,0);
+\draw[](0,-5)--(0,5);
+ %\draw [dashed](-5,-5) grid (5,5);
+ \node[] at (0,0) {
+    \includegraphics[width=1cm]{../images/55.png}
+};
+\draw(0,0)circle[radius=0.5];
+\foreach \i/\j/\f in  {-2/-2.5/54, 0.6/-2.1/53, -1.6/-0.2/51,-04/-3/52} {
+    \node[] at (\i,\j) {
+        \includegraphics[width=1cm]{../images/\f.png}
+    };
+};
+\foreach \i/\j/\f in  {1.4/1.6/41, 4/-3/42, 2/4/43,-3/2/44} {
+    \node[] at (\i,\j) {
+        \includegraphics[width=1cm]{../images/\f.png}
+    };
+};
+\foreach \i/\j/\f in  {3.5/1.5/61,-1/1.5/62,1.8/0/63} {
+    \node[] at (\i,\j) {
+        \includegraphics[width=1cm]{../images/\f.png}
+    };
+};
+\foreach \i/\j/\f in  {0/4/92} {
+    \node[] at (\i,\j) {
+        \includegraphics[width=1cm]{../images/\f.png}
+    };
+};
+\draw(0,0)circle [radius=2];
+\draw(0,0)circle [radius=3.5];
+\end{tikzpicture}
+\section{Parcours du jeu de données}
+
+    Le jeu de données est relativement petit mais pour l'algorithme des k
+plus proches voisins, il est déjà trop gros pour obtenir rapidement des
+résultats. On va donc effectuer un échantillonnage et travailler sur
+seulement 5000 données.
+
+\medskip
+
+On obtient deux listes, \textbf{data} et \textbf{target}.data
+contient les images sous forme d'une liste 28x28 = 784 entiers
+compris entre 0 et 255 correspondant aux différentes nuances de gris
+(255 étant blanc et 0 noir)  target contient les chiffres correspondant
+à l'image
+\begin{code}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k}{import} \PY{n}{fetch\PYZus{}openml}
+        \PY{n}{mnist} \PY{o}{=} \PY{n}{fetch\PYZus{}openml}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MNIST original}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{mnist}\PY{o}{.}\PY{n}{target}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{n}{sample} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{70000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{5000}\PY{p}{)}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{n}{sample}\PY{p}{]}
+        \PY{n}{data} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} 
+        
+        \PY{n}{target} \PY{o}{=} \PY{n}{mnist}\PY{o}{.}\PY{n}{target}\PY{p}{[}\PY{n}{sample}\PY{p}{]}
+\end{Verbatim}
+\end{code}
+
+    Afficher la liste correspondant à la 23ème image du jeu de données. A
+quel chiffre corrrespond cette image ?
+
+\begin{code}
+ \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n+nb}{print} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{23}\PY{p}{]}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Le chiffre represente est :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{23}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\end{code}
+    Dans la cellule ci-dessous vous allez prendre deux éléments de notre jeu
+de données, calculer la distance entre ces deux images et indiquer le
+chiffre qu'il représente
+\begin{code}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}}  ]:} \PY{n}{image1} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{23}\PY{p}{]}
+         \PY{n}{image2} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{65}\PY{p}{]}
+         \PY{n}{distance}\PY{p}{(}\PY{n}{image1}\PY{p}{,}\PY{n}{image2}\PY{p}{)}
+         \PY{n}{target}\PY{p}{[}\PY{l+m+mi}{23}\PY{p}{]}
+\end{Verbatim}
+\end{code}
+            
+
+\subsection{Le plus proche voisin avec le jeu de données}
+
+    Écrire une fonction \textbf{lePlusProcheVoisin} qui prend en paramètre une image
+(une liste de 784 entiers compris entre 0 et 255) et renvoie l'indice
+dans data du plus proche voisin.
+\begin{code}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}  }]:} \PY{k}{def} \PY{n+nf}{lePlusProcheVoisin} \PY{p}{(}\PY{n}{image}\PY{p}{)}\PY{p}{:}
+             \PY{n}{lePlusPres} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{distanceMin} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{di} \PY{o}{=} \PY{n}{distance} \PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{di} \PY{o}{!=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{di} \PY{o}{\PYZlt{}} \PY{n}{distanceMin}\PY{p}{:}
+                     \PY{n}{lePlusPres} \PY{o}{=} \PY{n}{i}
+                     \PY{n}{distanceMin} \PY{o}{=} \PY{n}{di}
+             \PY{k}{return} \PY{p}{(}\PY{n}{lePlusPres}\PY{p}{)}
+\end{Verbatim}
+\end{code}
+
+
+\subsection{Déterminer les k plus proches voisins d'un point}
+
+Écrire une fonction \textbf{lesKplusProchesVoisins} qui prend en paramètre une
+image et une valeur de k et renvoie la liste des indices dans data des k
+plus proches voisins. Quand vous prenez k = 1, cette fonction doit
+renvoyer le même résultat que la précédente, mis à part le fait que
+\textbf{lePlusProcheVoisin} renvoie une valeur numérique alors que
+\textbf{lesKplusProchesVoisins} renvoie une liste d'un élément.
+\begin{code}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}  }]:} \PY{k}{def} \PY{n+nf}{lesKplusProchesVoisins} \PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{n}{listeDesDistances} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{img} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                 \PY{n}{listeDesDistances}\PY{o}{.}\PY{n}{append} \PY{p}{(}\PY{n}{distance} \PY{p}{(}\PY{n}{image}\PY{p}{,} \PY{n}{img}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Kppv} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{p} \PY{o}{=} \PY{n+nb}{float} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n+nb}{len} \PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{listeDesDistances} \PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{listeDesDistances} \PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{p} \PY{o+ow}{and} \PY{n}{j} \PY{o+ow}{not} \PY{o+ow}{in} \PY{n}{Kppv}\PY{p}{:}
+                         \PY{n}{p} \PY{o}{=} \PY{n}{listeDesDistances} \PY{p}{[}\PY{n}{j}\PY{p}{]}
+                         \PY{n}{indice} \PY{o}{=} \PY{n}{j}
+                 \PY{n}{Kppv}\PY{o}{.} \PY{n}{append} \PY{p}{(}\PY{n}{indice}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{Kppv}\PY{p}{)}
+\end{Verbatim}
+\end{code}
+
+\section{Prédire l'étiquette d'une donnée}
+
+Écrire une fonction \textbf{predire} qui prend en paramètre une image dans
+le même format que celles de data et un entier \emph{k} et retourne le
+chiffre qui est prédit, c'est à dire le chiffre qui est supposé être
+représenté sur l'iamge. On décide du chiffre représenté sur l'image en
+appliquant un choix à la majorité, à savoir le chiffre qui apparaît
+majoritairement sur les \emph{k} plus proches voisins.
+\begin{code}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}  }]:} \PY{k}{def} \PY{n+nf}{predire} \PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Kppv} \PY{o}{=} \PY{n}{lesKplusProchesVoisins}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{k}\PY{p}{)}
+             \PY{n}{decomptes} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{10}
+             \PY{k}{for} \PY{n}{indice} \PY{o+ow}{in} \PY{n}{Kppv}\PY{p}{:}
+                 \PY{n}{decomptes}\PY{p}{[}\PY{n}{target}\PY{p}{[}\PY{n}{indice}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{plusGrandDecompte} \PY{o}{=} \PY{n}{decomptes} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{decomptes} \PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{plusGrandDecompte}\PY{p}{:}
+                         \PY{n}{plusGrandDecompte} \PY{o}{=} \PY{n}{decomptes} \PY{p}{[}\PY{n}{i}\PY{p}{]}
+                         \PY{n}{indice} \PY{o}{=} \PY{n}{i}
+             \PY{k}{return} \PY{n}{indice}
+\end{Verbatim}
+\end{code}       
+\section{Optimisation}
+\begin{code}
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}  }]:} \PY{k+kn}{from} \PY{n+nn}{data\PYZus{}target\PYZus{}test} \PY{k}{import} \PY{n}{data} \PY{k}{as} \PY{n}{data\PYZus{}test}\PY{p}{,}\PY{n}{target} \PY{k}{as} \PY{n}{target\PYZus{}test}
+         
+         \PY{k}{def} \PY{n+nf}{taux\PYZus{}erreur}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    calcule le taux d\PYZsq{}erreur avec la valeur k pour les k plus proches voisins}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{t}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{100}\PY{c+c1}{\PYZsh{}len(target\PYZus{}test)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{predire}\PY{p}{(}\PY{n}{data\PYZus{}test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,}\PY{n}{k}\PY{p}{)}\PY{o}{!=}\PY{n}{target\PYZus{}test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{:}
+                     \PY{n}{t}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{t}\PY{o}{/}\PY{n}{n}
+         
+         \PY{k}{def} \PY{n+nf}{optimisation}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    détermine quelle valeur de k donne la meilleure prédiction, avec k entre 1 et n}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             \PY{n}{liste\PYZus{}taux}\PY{o}{=}\PY{p}{[}\PY{n}{taux\PYZus{}erreur}\PY{p}{(}\PY{n}{k}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+             \PY{k}{return} \PY{n}{liste\PYZus{}taux}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{liste\PYZus{}taux}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{taux\PYZus{}erreur}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+\end{code} 
+    
+    \end{document}

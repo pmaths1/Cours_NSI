@@ -1,0 +1,42 @@
+\documentclass[10pt]{scrartcl}
+\usepackage{fourier}
+\usepackage[scaled=0.87]{helvet}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=1.5cm,lmargin=1cm,rmargin=1cm,headheight=1cm,headsep=0.8cm,footskip=1cm}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tkz-fct,tkz-tab}
+\begin{document}
+\begin{tikzpicture}
+\clip(-2,2)rectangle(1,-1);
+\node[inner sep=0pt] at (0,0) {
+\includegraphics[width=4cm]{m1doc.png}
+};
+\draw (-2,-2) grid (2,2);
+\draw[color=white](-0.5,0.5)node{40};
+\draw[color=white](-1.5,-1.5)node{40};
+\draw[color=white](-1.5,0.5)node{0};
+\draw[](0.5,-0.5)node{191};
+\draw[](-0.5,-1.5)node{191};
+\draw[](-1.5,1.5)node{255};
+\end{tikzpicture}
+\begin{tikzpicture}
+\clip(-1,1)rectangle(2,-2);
+\node[inner sep=0pt] at (0,0) {
+	\includegraphics[width=4cm]{m2doc.png}
+};
+\draw (-2,-2) grid (2,2);
+\draw[](-0.5,1.5)node{191};
+\draw[](-1.5,0.5)node{191};
+\draw[](1.5,0.5)node{191};
+\draw[](0.5,-0.5)node{191};
+\draw[](-0.5,0.5)node{255};
+\end{tikzpicture}
+
+\end{document}
