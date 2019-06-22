@@ -1,0 +1,386 @@
+\documentclass[10pt,french]{article}
+\usepackage{mathrsfs}
+\usepackage{eurosym}
+\usepackage{amsmath,amssymb,amsfonts}
+
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{array}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage{framed}
+\usepackage[framed]{ntheorem}
+\newframedtheorem{theoreme}{Théorème}
+
+%definition
+\def\theoremframecommand#1{\vrule\hspace{6pt}\hbox{#1}}
+\setlength\theorempreskipamount{0pt}%
+\setlength\theorempostskipamount{0pt}%
+\newshadedtheorem{definition}{\protect\definitionname}
+\theoremprework{%
+    \setlength\theorempreskipamount{\topsep}%
+    \setlength\theorempostskipamount{\topsep}%
+}
+\theoremstyle{plain}
+\theorembodyfont{}
+
+\newtheorem*{remarque}{Remarque}
+\newframedtheorem{propriete}{Propriété}
+\newtheorem*{proof}{Preuve}
+\newtheorem*{exemple}{Exemple}
+\newframedtheorem{enonce}{Enoncé}
+
+
+
+
+% Définition des environnements pour les théorèmes, proposition, etc...
+
+\providecommand{\definitionname}{Définition}
+\providecommand{\definitionname}{Définition}
+\providecommand{\definitionname}{exemple}
+\providecommand{\definitionname}{preuve}
+\providecommand{\definitionname}{remarque}
+\providecommand{\definitionname}{propriete}
+%\providecommand{\theoremname}{Théorème}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{fourier} % math & rm
+\usepackage[scaled=0.875]{helvet} % ss
+\usepackage[normalem]{ulem}
+\usepackage{pifont}
+\usepackage[tikz]{bclogo}
+\usetikzlibrary{positioning,shapes,decorations}
+\usepackage{wrapfig}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{multicol}
+
+\setlength{\columnseprule}{0.5pt}
+\setlength{\columnsep}{20pt}
+\usepackage{smartdiagram}
+\usepackage[paperwidth=210mm,paperheight=297mm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=15mm,lmargin=2cm,rmargin=2cm,headheight=1cm,headsep=5mm,footskip=5mm}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Les Signaux},
+            pdfauthor={Pascal Malingrey},
+            pdfkeywords={NSI, Signaux, Linux},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{xcolor}
+\usepackage[tikz]{bclogo}
+\usepackage{wrapfig}
+\usepackage{framed}
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{algpseudocode}%MISE EN PAGE
+
+\usepackage{listings,lipsum,listingsutf8}
+\definecolor{codegreen}{rgb}{0.1,0.47,0.1}
+\definecolor{fondjaune}{rgb}{0.99, 0.7,0.8}
+\definecolor{couleurdef}{rgb}{0.99, 0.8, 0.87}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\newcommand{\com}[1]{
+    \textit{\textcolor{olive}{#1}}
+    }
+\newenvironment{code}[1]{%
+    \begin{bclogo}[couleur=backcolour, couleurTexte=black ,couleurBord=blue ,couleurBarre=black, ombre=false,epBord=0.9,logo=\#,arrondi=0.1]{{\bfseries #1}}%
+    }%
+    {%
+    \end{bclogo}
+}%
+%---------------------------- version élève - prof
+\newboolean{Prof}
+
+\newcommand{\cacher}[1]{
+    \ifthenelse{\boolean{Prof}} % si « Professeur » est vrai,
+    {#1} %les mots cachés sont en gras
+    {\dashuline{\phantom{#1}}} % (else) sinon les mots sont remplacés par une ligne sur laquelle l'élève peut écrire. 
+}
+\newcommand{\cacherb}[1]{
+    \ifthenelse{\boolean{Prof}} % si « Professeur » est vrai,
+    {#1} %les mots cachés sont en gras
+    {\phantom{#1}} % (else) sinon les mots sont remplacés par une ligne sur laquelle l'élève peut écrire. 
+}
+%-------------------------------------------------------
+\usepackage{minted}
+\title{Tri d'un jeu de cartes}
+\author{Franck Chevier Patrick Thévenon Pascal Malingrey Serge Zellmeyer}
+\date{}
+%------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\Large Tri d'un jeu de cartes}
+
+
+\newcommand{\Affecter}[1]{\KwSty{Affecter  à } #1}
+\newcommand{\Afficher}[1]{\KwSty{Afficher } #1}
+\setlength{\algomargin}{2em}
+\SetAlgoInsideSkip{}
+\DontPrintSemicolon
+\SetKwFor{Tqe}{}{}{...}
+\SetKwFor{Tqf}{tant que}{faire}{{fin du tant que}}
+\SetKwFor{Rep}{Répéter }{faire}{{fin }}
+\SetKwFor{Pour}{Pour }{faire}{{fin }}
+%----------------------------------------------------------
+
+
+\begin{document}
+\setboolean{Prof}{true}  %----------------version prof
+
+\tableofcontents
+
+\section{Présentation de l'activité 1}
+
+
+
+\subsection{Enoncé}
+\begin{bclogo}[arrondi = 0,logo = \bcetoile]{Version 1}
+    On considère un jeu de cartes classique avec le même nombre de cartes , Les cartes forment un paquet battu et sont retournées.
+    
+    \textbf{Contrainte :}
+    On ne peut retourner que la carte du dessus.
+    
+    \textbf{But: }
+    être sûr d'avoir regroupé les cartes rouges et noires, et à ce moment on dit "stop".
+\end{bclogo}
+
+  \subsection{Consignes}
+  Vous disposez d'un paquet de 12 cartes. Élaborez votre stratégie, dont vous noterez succinctement les étapes.\sout{Passez la feuille à votre voisin qui devra trier un paquet avec vos indications.}
+  
+  \subsection{solution possible: celle qui semble le plus naturel}
+  
+ Avec la création deux paquets dont chacun dédié à une couleur, puis regroupement des deux paquets en un tas par superposition.
+ Voici une version avec un seul deuxième paquet.
+  
+  \begin{algorithm}[H]
+     \SetAlgoLined
+     \Donnees{un jeu battu de cartes retournées}
+     \Res{le jeu de cartes avec les cartes rouges en premier et les noires ensuite}
+     préparer un nouveau paquet avec la première carte retournée (face cachée sur la table) \;
+     \Tqf{notre paquet de départ n'est pas vide}{
+        retourner la carte du dessus \;
+         \eSi{elle est noire}{
+             la mettre au dessus\;
+         }{
+            la mettre sous le nouveau paquet\;
+         }
+     }
+   on dit "Stop" \;
+     \caption{À l'aide d'un second paquet}
+  \end{algorithm}
+  
+\subsection{Enoncé}
+\begin{bclogo}[arrondi = 0,logo = \bcetoile]{Version 2}
+   À la contrainte, du premier on ajoute :
+   
+    
+    \textbf{Contraintes :}
+    On ne peut retourner que la carte du dessus.\\
+    On ne peut pas créer un deuxième paquet (par exemple pas de tables à notre disposition), donc la seule opération possible est de l'insérer dans le paquet à n'importe quel endroit.
+    
+    \textbf{But: }
+        être sûr d'avoir regroupé les cartes rouges et noires, et à ce moment on dit "stop".
+\end{bclogo}
+
+  \subsection{solution possible: avec le curseur}
+  Trouver l'algorithme est plus compliqué maintenant. Les difficultés possibles:
+  \begin{itemize}
+      \item Pensez à indiquer l'endroit de séparation des rouges et noires
+      \item Bien positionnée la carte noire
+  \end{itemize}
+\begin{minipage}{0.5\linewidth}
+    \begin{algorithm}[H]
+        \SetAlgoLined
+        \Donnees{un jeu battu de cartes retournées}
+        \Res{le jeu de cartes avec les cartes rouges en premier et les noires ensuite}
+        
+        \Rep{tant qu'on n'a pas retourné 12 cartes}{
+            retourner la carte du dessus \;
+            \eSi{elle est noire}{
+                Insérer la carte au-dessus de la carte indiquant la première carte rouge (\textit{si elle n'existe pas la mettre sous le paquet})\;
+            }{
+                la mettre sous le paquet (\textit{s'il s'agit de la première carte rouge on la fait un peu sortir du paquet})
+            }
+        }
+        On dit "STOP"
+        \caption{On parcourt tout le paquet}
+    \end{algorithm}
+    \end{minipage}
+    \begin{minipage}{0.5\linewidth}
+    \begin{algorithm}[H]
+        \SetAlgoLined
+        \Donnees{un jeu battu de cartes retournées}
+        \Res{le jeu de cartes avec les cartes rouges en premier et les noires ensuite}
+        
+        \Rep{tant qu'on n'a pas retourné 6 cartes rouges}{
+            retourner la carte du dessus \;
+            \eSi{elle est noire}{
+                Insérer la carte au-dessus de la carte indiquant la première carte rouge (\textit{s'elle n'existe pas la mettre sous le paquet})\;
+            }{
+                la mettre sous le paquet. (\textit{s'il s'agit de la première carte rouge on la fait un peu sortir du paquet})
+            }
+        }
+        On dit "STOP"
+        \caption{En parcourant le "minimum" de cartes}
+    \end{algorithm}
+\end{minipage}
+
+\begin{remarque}
+On pourrait penser que l'algorithme3 est bien plus rapide, que l'algorithme 2 mais en fait on a une probabilité $ \dfrac{1}{2} $, qu'il fasse exactement le même nombre de répétitions (la dernière carte du paquet de départ est noire). Voir plus loin pour davantage de renseignements
+\end{remarque}
+
+
+\section{Formalisation des algorithmes}
+
+Nous ne pouvons pas ou du moins difficilement  apporter la preuve que les algorithmes fonctionnent dans tous les cas, même si intuitivement cela semble correct. Il faut formaliser les procédés afin de prouver les algorithmes.
+
+Il faut répondre aux interrogations suivantes:
+\begin{enumerate}
+    \item Comment représenter un jeu de cartes ? Les couleurs ?
+    \item En quoi  les boucles \textbf{tant que } et \textbf{Répeter} ne bouclent pas à l'infini ?
+    \item l'algorithme retourne-t-il  bien un jeu trié ?
+\end{enumerate}
+\subsection{Représentation du jeu et réécriture des algorithmes}
+Représentation de notre jeu:\\
+Un jeu de cartes est représenté par une liste ordonnées d'entiers, dont la valeur représente une couleur:\\
+ $L=(L_0,L_1,L_2, \dots,L_n)=(L_i)_{0\leqslant i \leqslant n}$ où n+1 est le nombre de cartes.
+ 
+\begin{minipage}{0.45\linewidth}
+       \begin{algorithm}[H]
+        \SetAlgoLined
+        \Donnees{$L=(L_0,L_1,L_2, \dots,L_n)$}
+        \Res{Pour  $i < \frac{n}{2}$ on a  $L_i = 0$ et  pour $i \geqslant \frac{n}{2}$ on a $L_i = 1$  }
+        $N\gets ()$\;
+        \Pour{$i $ allant de 0 à $n$}{
+            
+            \eSi{$L_i =  1$}{
+                $N \gets (N_0,..., L_i)$
+            }{
+                $N \gets (L_i,N_0,...)$
+            }
+        }
+        on dit "Stop" \;
+        \caption{version formalisée}
+    \end{algorithm}
+\end{minipage}
+\begin{minipage}{0.55\linewidth}            
+          \begin{algorithm}[H]
+            \SetAlgoLined
+            \Donnees{un jeu battu de cartes retournées}
+            \Res{le jeu de cartes avec les cartes rouges en premier et les noires ensuite}
+            préparer un nouveau paquet avec la première carte retournée (face cachée sur la table) \;
+            \Tqf{notre paquet de départ n'est pas vide}{
+                retourner la carte du dessus \;
+                \eSi{elle est noire}{
+                    la mettre sous le nouveau paquet\;
+                }{
+                    la mettre au dessus
+                }
+            }
+            on dit "Stop" \;
+    \end{algorithm}
+\end{minipage}
+
+Maintenant on va prouver que l'algorithme fonctionne:
+
+    
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \Donnees{$L=(L_0,L_1,L_2, \dots,L_n)$}
+    \Res{Pour  $i < \frac{n}{2}$ on a  $N_i = 0$ et  pour $i \geqslant \frac{n}{2}$ on a $N_i = 1$ avec... }
+    $N \gets ()$\;
+     \com{\# Variant de boucle $i \leqslant n$}\; 
+     \com{\# Invariant de boucle $\mathcal{P}(i)$:  pour $j< cur$, on a  $N_j=0$ et pour $cur\leqslant j<i$, on a  $N_j=1$}\;
+     \com{\# $cur \gets -1$}\;
+    \Pour{$i $ allant de 0  à $n$}{
+   
+        \eSi{$L_i =  1$}{
+            $N \gets  (N_0,..., L_i)$
+        }{
+           \com{\# $cur \gets cur + 1 $}\;
+            $N \gets (L_i,N_0,...)$
+        }
+    }
+    on dit "Stop" \;
+    \caption{version formalisée}
+\end{algorithm}
+
+\begin{proof}
+    La preuve s'effectue en deux parties, la terminaison et la preuve partielle.
+    \begin{description}
+        \item[La terminaison:]     la suite $i$ est une suite d'entier naturel strictement croissante, donc elle dépassera $n$ et la condition $i \leqslant n$   n'étant plus satisfaite, la boucle se termine.
+        \item[La preuve partielle:] supposons qu'à l'étape $i$, on ait $\mathcal{P}(i)$ c'est à dire  pour $j < cur$ on a  $N_j=0$ et pour $cur \leqslant j<i$, on a  $N_j=1$.
+        
+        À fin de l'étape $i$ deux cas se présentent:
+        \begin{description}
+            \item [$L_i = 1$]  : dans ce cas pour  $j < cur$ on a  $N_j=0$ (car l'élément a été ajouté à la fin )\\
+            pour $cur \leqslant j<i$, on a toujours $N_j=1$ (hypothèse de récurrence?) \\
+            pour $j=i$ on a $N_j=L_i=1$, donc\\
+            pour $cur \leqslant j\leqslant i <i+1$, on a toujours $N_j=1$.
+            \item [$L_i = 0$] : ... difficile de rédiger sans introduire $N'$ la nouvelle valeur de $N$...
+        \end{description}
+    \end{description}
+
+
+
+
+\end{proof}
+
+\subsection{complexité des algorithmes dans le point 1.5}
+
+Pour l'algorithme 2, on a toujours 12 répétitions.
+\vskip 0.2cm
+Pour la suite on peut noter $X$ la variable aléatoire qui égale au nombre minimal de tirages pour avoir le paquet trié.
+Pour l'algorithme 3:
+\begin{enumerate}
+    \item Dans le meilleur des cas: 6 répétitions avec un paquet déjà trié (rouges puis noires). $P\left( X=6 \right)=\frac{6!6!}{12!}=\frac{1}{924} $
+    \item Dans le pire des cas, la dernière carte du tas est noire et donc on a 12 répétitions.  $P\left( X=12 \right)=\frac{1}{2} $
+\item En moyenne: la probabilité d'avoir $6+k$ tirages est $P\left( X=6+k \right)=\binom{5+k}{5}\times \frac{6!6!}{12!}$
+
+   \renewcommand*{\arraystretch}{2}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline 
+        Nbr répétitions ($X=6+k$)& 6&7  &8  &9  &10  &11  &12  \\ 
+        \hline 
+        probabilité &  $\dfrac{1}{924}$ & $\dfrac{1}{154}$ &$\dfrac{1}{44}$  &$\dfrac{2}{33}$  &$\dfrac{3}{22}$  &  $\dfrac{3}{11}$& $\dfrac{1}{2}$ \\ 
+        \hline 
+    \end{tabular} 
+\end{enumerate}
+
+Donc la moyenne est $\dfrac{78}{7} \simeq 11,14$
+\vskip 0.2cm
+Pour l'algorithme 3(bis):
+il y a aucune raison de favoriser une couleur par rapport à une autre, et donc la condition devient on s'arrête dés que l'on a retourné 6 cartes d'une même couleur.
+\begin{enumerate}
+    \item Dans le meilleur des cas: 6 répétitions, paquet déjà trié. $ \frac{2\times6!6!}{12!}=\frac{1}{462} $
+    \item Dans le pire des cas et tout dépend du choix de la couleur mise en dessous, si elle est rouge on la met sous le paquet et si elle noire on n'a pas à bouger la carte, donc la probabilité est $\dfrac{1}{2}$.
+    \item En moyenne: ...
+    
+\end{enumerate}
+
+\subsection{réflexions sur l'implémentation - hors sujet}
+Cette section n'a pas d'intérêt dans le cadre de l'algorithmique, mais la question de comment implémenter l'algorithme et le coup en temps est intéressant.
+Voici quelques 
+résultats (Cf Annexe 2), on crée mille fois un paquet de mille cartes qu'on trie:\\
+TRI avec la méthode du drapeau hollandais inversion de deux cartes  0.7092394939973019\\
+TRI avec la méthode du drapeau hollandais création d'une nouvelle liste  06.852948751999065\\
+TRI avec la création d'une seconde liste  0.7922300749996793
+
+\newpage
+\rhead{ANNEXE }
+\scriptsize
+
+    \inputminted{Python}{cartes.py}
+
+\newpage
+\rhead{ANNEXE 2}
+        \inputminted{Python}{algo.py}
+\end{document}
