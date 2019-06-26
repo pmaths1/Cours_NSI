@@ -333,7 +333,7 @@ force/.style={rectangle, draw, fill=black!8, inner sep=5pt, text width=3cm, text
 
 Quelques événements possibles
 \begin{itemize}
-    \item frappe de caractère dans un terminal
+    \item frappe de caractère dans un terminal \textit{(c'est interpréteur de commande qui envoie  un signal)}
     \begin{itemize}
         \item  \texttt{Ctrl+C} 
         \item \texttt{Ctrl+Z} etc.
@@ -536,6 +536,8 @@ force/.style={rectangle, draw, fill=black!8, inner sep=5pt, text width=3.5cm, te
 \draw[-latex,blue](2,-0.1)--(2,-1)--(4,-1)node[comment,midway,below]{Exécution du gestionnaire};
 \draw[-latex,blue](4,-1)to[bend left=90, out =- 90](0.5,0); \draw(4.5,1)node[force]{Le gestionnaire retourne vers un point de reprise sauvegardé antérieurement};
 \end{tikzpicture}
+
+Attention: Le signal SIGCONT ne peut être pris en charge par un \textbf{gestionnaire} car il s'adresse à un processus qui est en endormi (SIGSTOP).
 \item
   Le signal peut être \textbf{bloqué} (on dit également \textbf{masqué}). Ceci signifie
   que la délivrance du signal est différée jusqu'à ce que le blocage
@@ -811,7 +813,7 @@ Dans le terminal
 
 source : \url{http://mat.free.free.fr/downloads/unix/signaux.pdf}
 \begin{description}
-    \item[lSIGFPE]  Floating-point exception : envoyé lors d'un problème avec une opération en
+    \item[SIGFPE]  Floating-point exception : envoyé lors d'un problème avec une opération en
     virgule flottante mais il est aussi utilisé pour l'erreur de division entière par
     zéro. L'action par défaut est la mise à mort du processus en créant un fichier
     d'image mémoire core. Ce fichier est alors utilisé par l'outil de "debugger"

@@ -21,11 +21,14 @@ def input_delai():
         rep = input()
         return rep
     except TimeoutError: # temps dépassé
-        return "temps depassé"
+        return None
 
 # le chrono tourne
 signal.alarm(TIMEOUT)
 s = input_delai()
 # Ne pas oublier d'arrêter le chrono pour poursuivre
 signal.alarm(0)
-print( 'votre réponse est:',s)
+if s: 
+    print( 'votre réponse est:',s)
+else:
+    print('le temps est dépassé')

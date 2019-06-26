@@ -1,5 +1,4 @@
-import signal
-import time
+import signal, time
 
 def mongestionnaire(sig,frame):
 	if sig == signal.SIGINT:

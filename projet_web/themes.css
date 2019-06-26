@@ -35,21 +35,20 @@ li {
   background-position:-107px -3px;
 }
 .de3{
-  background-position:-214px -3px;
+  background-position:-215px -3px;
 }
 .de4{
-  background-position:-321px -3px;
+  background-position:-322px -3px;
 }
 .de5{
-  background-position:-428px -3px;
+  background-position:-429px -3px;
 }
 .de6{
-  background-position:-532px -3px;
+  background-position:-536px -3px;
 }
 table{
   width:60%;
-  margin:auto;
-  margin-top:2em;}
+  margin:auto;}
 td{text-align: center;}
 tr:nth-child(odd){
 background-color:#EEE;
@@ -57,4 +56,9 @@ background-color:#EEE;
 
 tr:nth-child(even){
 background-color:#CCC;
+}
+#graphe{
+  width:640px%;height: 300px;
+  background-color: #FFF;
+  margin:auto;
 }
