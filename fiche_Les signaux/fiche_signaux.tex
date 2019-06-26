@@ -69,6 +69,7 @@
             pdfauthor={Pascal Malingrey},
             pdfkeywords={NSI, Signaux, Linux},
             pdfborder={0 0 0},
+            pdfsubject={Les signaux sur Linux},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{xcolor}
@@ -117,21 +118,33 @@
 
 
 \begin{document}
-\setboolean{Prof}{false}  %----------------version prof
 
   \ifProf
 \section*{Prérequis}
 \begin{enumerate}
+    \item Système d'exploitation : Linux
     \item Les notions de base sur le fonctionnement du noyau et les processus.
-    \item Le shell
-    \item Python: écriture d'une fonction
+    \item Utilisation de la console.
+    \item Python: 
+    \begin{itemize}
+        \item écriture d'une fonction
+        \item avoir vu \textit{try except} est un plus (gestion des erreurs avec Python)
+    \end{itemize}
 \end{enumerate}
 \section*{Organisation}
 \begin{itemize}
-\item La séance est prévue pour être faite une partie en classe entière ou idéalement en salle informatique et la séance d'exercices en salle d'informatique. (1h+1h). 
-\item La  feuille de cours est à compléter.
-\item Remarque: un diaporama sera mis à disposition après les remarques faites
+\item La séance est prévue pour être faite une partie en classe entière ou idéalement en salle informatique et la séance d'exercices en salle informatique. (1h+1h). 
+\item La  feuille de cours est à compléter (il s'agit de la partie les notions)
+\item Un diaporama accompagne les fiches afin d'apporter des précisions sur les notions abordées
 \end{itemize}
+\section*{Compétences visées}
+\begin{itemize}
+    \item communication entre les processus : les signaux
+    \item implémentation des signaux avec Python, écriture des gestionnaires de signaux.
+\end{itemize}
+
+\tableofcontents
+
 \newpage
 \fi
 
@@ -349,15 +362,15 @@ Numéro & Nom & Signification & Comportement\\
     \hline 
 1&SIGHUP & Hang-up (fin de connexion) & T(erminaison)\\ 
     \hline 
- 2 &  \cacherb{SIGINT} &\textbf{ Interruption (Ctrl-C) } &T\\ 
+ 2 &  \cacherb{SIGINT} &Interruption (Ctrl-C)  &T\\ 
     \hline 
 \cacherb{3}    &SIGQUIT & Interruption forte (Ctrl-$\backslash$) & T + core\\ 
     \hline 
  \cacherb{8}   &SIGFPE & Erreur arithmétique & T + core\\ 
     \hline 
-    9 &\cacherb{SIGKILL} &\textbf{ Interruption immédiate et absolue} & T + core\\ 
+    9 &\cacherb{SIGKILL} & Interruption immédiate et absolue & T + core\\ 
     \hline 
-\cacherb{11}   &SIGSEGV&\textbf{Violation des protections mémoire} &T + core\\ 
+\cacherb{11}   &SIGSEGV&Violation des protections mémoire &T + core\\ 
     \hline 
  \cacherb{13}   &SIGPIPE &Écriture sur un pipe sans lecteurs& T\\ 
     \hline 
@@ -530,6 +543,15 @@ force/.style={rectangle, draw, fill=black!8, inner sep=5pt, text width=3.5cm, te
   pas supprimé, il est juste mis en attente : il devient donc pendant.
 \end{itemize}
 \vskip 0.5em
+\begin{definition}
+    Donc les différents états d'un signal sont:
+    \begin{description}
+        \item[généré/émis:] L'événement associé au signal s'est produit
+        \item[délivré:] L’action associée au signal a été exécutée
+        \item[pendant:]  Le signal émis n'a pas encore été pris en compte
+        \item[bloqué/masqué:] La prise en compte du signal est volontairement différée.
+    \end{description}
+\end{definition}
 
 L'ensemble des informations des signaux pour un processus est regroupé en un vecteur (un pour chaque processus) indexé sur les numéros de signaux et dont chaque case
 comporte 3 informations :
@@ -547,12 +569,12 @@ comporte 3 informations :
 \end{itemize}
 
 \subsection{Description détaillée des signaux}
-\hypertarget{liste-signaux}{ Voir l'annexe 2}
+\hypertarget{liste-signaux}{ Voir la deuxième page de l'annexe}
 
 \newpage
 
 \hypertarget{retour-uxe0-la-programmation}{%
-\subsection{Retour à la
+\section{Retour à la
 programmation}\label{retour-uxe0-la-programmation}}
 
 Nous avons vu dans la première partie que certains signaux peuvent être interceptés par le processus. 
@@ -575,8 +597,7 @@ Regardons comment faire à l'aide de Python
 \ifProf
 \begin{code}{ex1b.py}
 \begin{minted}{Python}
-import signal
-import time
+import signal, time
 
 def mongestionnaire(signum,stack):
     print("Ctrl-C est désactivé")
@@ -590,13 +611,15 @@ while 1:
     i += 1
 \end{minted}
 \end{code}
+
+La commande \textbf{kill -2 pid}(SIGINT)  ne permet plus d'arrêter le programme, il faut donc envoyer un signal d'interruption qui ne peut pas être intercepté ou modifi', il s'agit \textbf{kill - 9 pid} (SIGKILL).
 \fi
+\vskip 0.5 cm
 
 \begin{exercice}
     Voici un programme:
-        \begin{minted}[autogobble, linenos]{Python}
-    import signal
-    import time
+        \begin{minted}[autogobble, linenos,fontsize=\small]{Python}
+    import signal, time
     
     def mongestionnaire(signum, stack):
         print('Alarme :', time.ctime())
@@ -610,8 +633,19 @@ while 1:
    \end{minted}
    
    \begin{enumerate}
-       \item Expliquer les commandes des lignes 7 et 8.
+       \item Expliquer les commandes des lignes 6 et 7.
+       
+       \ifProf
+    \textbf{Ligne 6: on associe au signal SIGALRM, la fonction mongestionnaire comme handler.}\\
+    \textbf{Ligne 7: on envoie le signal SIGALRM au processus actuel avant un temps de 2 secondes d'attente.}
+       \fi
        \item Que va afficher le programme, si l'heure de début est 12:00:00 (12h )?
+              \ifProf
+              
+       \textbf{Première : 12:00:00}\\
+       \textbf{Alarme : 12:00:02}\\
+        \textbf{Terminale : 12:00:02}\\
+       \fi
    \end{enumerate}
 \end{exercice}
 
@@ -631,16 +665,68 @@ Apporter les modifications nécessaires, pour réaliser ce que l'on souhaite.
 
 \ifProf
 \begin{code}{ex3.py}
-    \inputminted{Python}{ex3.py}
+    \inputminted[fontsize=\small]{Python}{ex3.py}
 \end{code}
 \fi
 \begin{exercice}
-   Un programme attend une réponse de l'utilisateur suite à une commande \textbf{input}. On aimerait qu'au bout de 5 secondes un message s'affiche, pour demander de répondre dans les 5 prochaines secondes et si tel n'est pas le cas le programme s'interrompt.
-   
+    Un programme attend une réponse de l'utilisateur suite à une commande \textbf{input}. On aimerait qu'au bout de 5 secondes un message s'affiche, pour demander de répondre dans les 5 prochaines secondes et si tel n'est pas le cas le programme s'interrompt.
+    
+\end{exercice}
+\ifProf
+\begin{code}{ex4.py}
+    \inputminted[fontsize=\small]{Python}{ex4.py}
+\end{code}
+\fi
+\begin{exercice}
+    Nous avons deux programmes qui permettent de communiquer entre deux personnes (ex le jeu du juste prix). Le premier programme \textbf{serveur.py} va créer le canal de communication et le client \textbf{client.py} va pouvoir s'y connecter.
+    \begin{enumerate}
+        \item Lancez dans deux shells différents le serveur avec \textbf{python3 serveur.py}, puis \textbf{python3 client.py} et testez la communication.
+       \item À l'aide d' une copie d'écran avec trois shell bash (et uniquement trois sont lancés ), répondez aux questions suivantes:
+       
+       \includegraphics[width=1\linewidth]{bash_3x}
 
+    
+       \begin{enumerate}
+           \item  Quel est le numéro pid du processus lié à  l'exécution de client.py ?
+           
+             \ifProf
+                \textbf{La commande \textit{ htop}  nous indique que le pid du client.py est 11817.}
+             \fi
+           \item Quel(s) pourrait(aient) être le pid du parent du processus à  l'exécution de client.py ?
+           
+              \ifProf
+           \textbf{Le parent est un programme \textit{bash}, donc en utilisant les informations de  \textit{htop} on voit qu'il peut s'agir du pid 11806 ou 11792}
+           \fi
+           \item Comment mettre fin au  processus associé serveur.py ? (donnez deux possibilités)
+            
+             \ifProf
+           \textbf{En tapant Ctrl-C, avec  la fenêtre du terminal correspondant actif, en cliquant sur la croix de la fenêtre appropriée ou en tapant dans une console kill -2 11812.}
+           \fi
+       \end{enumerate}
+        \item Tuez le serveur et continuez à envoyer des messages par le biais du client. Quelle message d'erreur apparaît? En expliquer la raison.
+        Aurait-on pu procéder différemment ?
+        
+         \ifProf
+        \textbf{On a l'erreur suivante : BrokenPipeError: [Errno 32] Broken pipe.\\ En fermant le serveur, le canal de communication n'est plus disponible rendant impossible l'écriture des données dans le PIPE (canal, tuyau). Le programme client a reçu un signal SIGPIPE.}
+        
+         \textbf{Il n'est pas nécessaire d'arrêter le serveur pour casser le canal de communication, on peut également exécuter la commande : } 
+ kill -13 pid  (où pid est le numéro du processus à l'exécution du client).
+
+        \fi
+        
+        \item Modifier le programme client pour que le programme prenne en considération cette erreur en demandant à l'utilisateur s'il veut continuer ou s'il veut mettre fin au programme.
+        
+        \ifProf
+   
+        \begin{code}{client.py}
+            \inputminted[fontsize=\small]{Python}{client.py}
+        \end{code}
+        \fi
+    \end{enumerate}
+    
 \end{exercice}
 \newpage
-\section*{Annexe 1}
+\section{Annexes}
 
 \subsection{Description du fonctionnement CTRL-Z}
 
@@ -691,7 +777,7 @@ Dans le terminal
 \end{center}
  La commande \textbf{killall -2 cat } n'a pas d'action sur le processus \textbf{cat}  car il ne fait partie des processus qui sont au premier plan. 
  
-\noindent À l'aide de la commande \textbf{bg} (signal SIGCONT) le processus réintègre les processus de premier plan.
+\noindent À l'aide de la commande \textbf{fg} (signal SIGCONT) le processus réintègre les processus de premier plan.
 
   \begin{center}
     \begin{tikzpicture}[
@@ -805,5 +891,10 @@ d'écrire sur le terminal. L'action par défaut est la suspension.
     système alarm().
 \end{description}
 
+\newpage
+\subsection*{Humour :  SIGTERM et SIGKILL ©Daniel Stori}
+\begin{center}
+    \includegraphics[width=0.75\linewidth]{dont-sigkill}
+\end{center}
 
 \end{document}

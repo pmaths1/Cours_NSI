@@ -5,12 +5,42 @@
 
 \usepackage[french]{babel}
 
-\usetheme{hsrm}
+%\usetheme{hsrm}
 %------------------------------
+\useinnertheme[shadow=true]{rounded}
+\useoutertheme{infolines}
+
+%\setbeamerfont{block title}{size={}}
+\definecolor{bleulapis}{HTML}{247BA0}
+\definecolor{rouge}{HTML}{A41D22}
+\definecolor{noire}{HTML}{262626}
+
+\setbeamercolor{alerted text}{fg=rouge}
+\setbeamercolor*{palette primary}{fg=white,bg=white!30!bleulapis}
+\setbeamercolor*{palette secondary}{fg=white,bg=white!40!bleulapis}
+\setbeamercolor*{palette tertiary}{fg=white,bg=white!50!bleulapis}
+%\setbeamercolor*{palette quaternary}{fg=darkblue,bg=yellow!20!orange}
+
+\setbeamercolor*{sidebar}{fg=bleulapis,bg=white}
+\setbeamercolor{block title}{bg=bleulapis,fg=white}
+%\setbeamercolor*{palette sidebar primary}{fg=darkblue!10!black}
+%\setbeamercolor*{palette sidebar secondary}{fg=white}
+%\setbeamercolor*{palette sidebar tertiary}{fg=darkblue!50!black}
+%\setbeamercolor*{palette sidebar quaternary}{fg=yellow!10!orange}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{frametitle}{fg=white,bg=bleulapis}
+%\setbeamercolor{frametitle right}{bg=yellow!60!orange}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{itemize items}[default]
+%\setbeamercolor{palette tertiary}{fg=white, bg=blue}
 \usepackage{tikz}
 \usepackage[tikz]{bclogo}
 \usetikzlibrary{positioning}
-\usetikzlibrary{mindmap,backgrounds,shapes,snakes}
+\usetikzlibrary{mindmap,backgrounds,shapes,decorations}
 \usepackage{wrapfig}
 \usepackage{minted,listings}
 
@@ -58,7 +88,7 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \newenvironment{code}[1]{%
-    \begin{bclogo}[couleur=backcolour, couleurTexte=black ,couleurBord=blue ,couleurBarre=black, ombre=false,epBord=0.9,logo=\#,arrondi=0.1]{{\bfseries #1}}%
+    \begin{bclogo}[couleur=backcolour, couleurTexte=black ,couleurBord=bleulapis ,couleurBarre=black, ombre=false,epBord=0.9,logo=\#,arrondi=0.1]{{\bfseries #1}}%
     }%
     {%
     \end{bclogo}
@@ -75,8 +105,7 @@
 \begin{document}
 \maketitle
 
-\hypertarget{premiuxe8re-approche}{%
-\section{Première approche}\label{premiuxe8re-approche}}
+\section{Première approche}
 
 \defverbatim \exe{
 \begin{minted}{bash}
@@ -90,7 +119,7 @@ Vous disposez dans votre dossier d'un fichier \textbf{ex1.py} (son contenu n'a p
 Dans un terminal vous exécuter la commande suivante:
 
 \begin{code}{terminal}
-\exe
+ \parbox{6cm}{\exe}
 \end{code}
 
 \begin{enumerate}[<+->]
@@ -155,8 +184,8 @@ PID TTY          TIME CMD
         \onslide<1->
         Les commandes
        
-                 \begin{code}{terminal}         
-               \exun
+                 \begin{code}{terminal}
+                     \parbox{6cm}{ \exun}
            \end{code}
     \end{column}
 
@@ -166,7 +195,7 @@ PID TTY          TIME CMD
         Le résultat
         
        \begin{code}{terminal}
-                         \exdeux
+             \parbox{6cm}{  \exdeux}
        \end{code}
     \end{column}
 \end{columns}
@@ -207,7 +236,7 @@ Regardons ce qu'il en est des processus
         Les commandes
         
         \begin{code}{terminal}         
-            \exun
+          \parbox{6cm}{  \exun}
         \end{code}
     \end{column}
     
@@ -217,7 +246,7 @@ Regardons ce qu'il en est des processus
         Le résultat
         
         \begin{code}{terminal}
-            \exdeux
+           \parbox{6cm}{ \exdeux}
         \end{code}
     \end{column}
 \end{columns}
@@ -254,7 +283,7 @@ Regardons ce qu'il en est des processus
           Les commandes
           
           \begin{code}{terminal}         
-              \exun
+               \parbox{6cm}{  \exun}
           \end{code}
       \end{column}
       
@@ -264,7 +293,7 @@ Regardons ce qu'il en est des processus
           Le résultat
           
           \begin{code}{terminal}
-              \exdeux
+               \parbox{6cm}{  \exdeux}
           \end{code}
       \end{column}
   \end{columns}
@@ -293,8 +322,8 @@ force/.style={rectangle, draw, fill=black!8, inner sep=2pt, text width=1.8cm, te
 \pause
 
 \begingroup
-\setbeamercolor{block title}{bg=hsrmSec2Dark}
-\setbeamercolor{block body}{bg=hsrmSec2}
+%\setbeamercolor{block title}{bg=hsrmSec2Dark}
+%\setbeamercolor{block body}{bg=hsrmSec2}
 \begin{block}{Conclusion}
     Suite à la reprise du processus, le signal  \textbf{Ctrl-C } a été exécuté. \\
     Le signal d'interruption n'est traité que lorsque le processus
@@ -374,7 +403,7 @@ nsi@lin$ killall -l
 \begin{frame}{Lister les signaux}
 Exécuter la commande ci-dessous pour avoir la liste des signaux disponibles
 \begin{code}{terminal}
-\ex
+   \parbox{6cm}{  \ex}
 \end{code}
 \end{frame}
 
@@ -424,8 +453,8 @@ T: terminaison du processus
 \begin{frame}{Remarque}
     
     \begingroup
-    \setbeamercolor{block title}{bg=hsrmSec2Dark}
-    \setbeamercolor{block body}{bg=hsrmSec2}
+%    \setbeamercolor{block title}{bg=hsrmSec2Dark}
+%    \setbeamercolor{block body}{bg=hsrmSec2}
     \begin{block}{Quelle différence entre SIGSTP et SIGSTOP, de même entre SIGINT et SIGKILL?}
     
     Certains signaux ne peuvent être bloqués ou ignorés par le processus, c'est le cas de de SIGSTOP et SIGKILL.
@@ -475,14 +504,18 @@ force/.style={rectangle, draw, fill=black!8, inner sep=5pt, text width=1.5cm, te
 \draw[<->](-1.5,-1.5) -- (2.5,-1.5);
 }
 \only<+->{
+    \draw[thin,->](7.5,1)--(7.5,-2)node[comment,below]{retour d'un appel système};
+}
+\only<+->{
     \draw(10,0.5)node[force]{processus 2};
     \draw[->](8,-1.5) to[bend left,thick]  (8.2,-0.5);
-\draw[thin,->](7.5,1)--(7.5,-2)node[comment,below]{retour d'un appel système};
+
 \draw(10,-0.5)node[comment]{\bfseries actions sur les signaux};
 }
 \end{tikzpicture}
-\pause
+\end{frame}
 
+\begin{frame}{Résumé}
 \begin{itemize}
     \item<+->
     Le processus est en mode utilisateur. La délivrance devra alors
@@ -502,7 +535,18 @@ est associée (son gestionnaire ou\textbf{ handler})  est appelée. L'action du 
 \end{enumerate}
 \end{itemize}
 \end{frame}
-
+%----------------------------------- FRAME -----------------------------------------------
+\begin{frame}{Etats d'un signal}
+\begin{definition}
+    Donc les différents états d'un signal sont:
+    \begin{description}[<+->]
+        \item[généré/émis:] L’événement associé au signal s’est produit
+        \item[délivré:] L’action associée au signal a été exécutée
+        \item[pendant:]  Le signal émis n'a pas encore été pris en compte
+        \item[bloqué/masqué:] La prise en compte du signal est volontairement différée.
+    \end{description}
+\end{definition}
+\end{frame}
 %----------------------------------- FRAME -----------------------------------------------
 \begin{frame}{Compléments}
 \vskip 0.5em
@@ -574,13 +618,13 @@ force/.style={rectangle, draw, fill=black!8, inner sep=2pt, text width=1.8cm, te
 % Draw forces
 \draw[->](0,0)node[force]{processus cat:\\lancé}--++(4,0)node[force]{processus cat:\\stoppé}--++(4,0)node[force]{processus cat:\\tjs stoppé}--++(0,-2)node[force]{processus cat:\\reprise}--++(-4,0)node[force]{processus:\\tué};
     \only<+->{
-    \draw(2.8,-0.3)node[comment]{suspension};
+    \draw(2.8,-0.3)node[comment]{SIGSTP\\ suspension};
 }
     \only<+->{
-\draw(6.5,-0.3)node[comment]{aucun};
+\draw(6.5,-0.3)node[comment]{SIGINT\\ aucun};
 }
     \only<+->{
-\draw(8,-1)node[comment]{ignoré};
+\draw(8,-1)node[comment]{SIGCONT\\ ignoré};
 }
     \only<+->{
 \draw(6.5,-2.3)node[comment]{terminaison};
@@ -607,12 +651,6 @@ Regardons comment faire à l'aide de Python
 \end{bclogo}
 \end{frame}
 
-\begin{frame}{Exerice 1}
-\begin{exercise}
-Reprenez le fichier \textbf{ex1.py} et le modifier pour que le signal SIGINT(Ctrl-C) ne puisse pas interrompre le programme.
-\end{exercise}
-\end{frame}
-
 %-------------------------------- FRAME ---------------------------------------------------
 
 \defverbatim[colored] \solex{
@@ -632,16 +670,20 @@ while 1:
     i += 1
 \end{minted}
 }
-\begin{frame}{Exerice 1: une solution}
+\begin{frame}{Exerice 1}
+\begin{exercise}
+    Reprenez le fichier \textbf{ex1.py} et le modifier pour que le signal SIGINT(Ctrl-C) ne puisse pas interrompre le programme.
+\end{exercise}
+\pause
 \begin{code}{ex1b.py}
-\solex
+   \parbox{10cm}{  \solex}
 \end{code}
 \end{frame}
 
 %-------------------------------- FRAME ---------------------------------------------------
 
 \defverbatim[colored]\exii{
-\begin{minted}[autogobble, linenos]{Python}
+\begin{minted}[autogobble, linenos,fontsize=\small]{Python}
 import signal
 import time
 
@@ -651,9 +693,9 @@ def mongestionnaire(signum, stack):
 signal.signal(signal.SIGALRM, mongestionnaire)
 signal.alarm(2)
 
-print('Before:', time.ctime())
+print('Première:', time.ctime())
 time.sleep(4)
-print('After :', time.ctime())
+print('Terminale :', time.ctime())
 \end{minted}
 }
 
@@ -663,10 +705,18 @@ print('After :', time.ctime())
 Voici un programme:
 
 \exii
-
-\begin{enumerate}
-    \item Expliquer les commandes des lignes 7 et 8
+ \begin{enumerate}
+    \item Expliquer les commandes des lignes 6 et 7.
+    
+    \pause
+    \textbf{Ligne 6: on associe au signal SIGALRM, la fonction mongestionnaire comme handler.}\\
+    \textbf{Ligne 7: on envoie le signal SIGALRM au processus actuel avant un temps de 2 secondes d'attente.}
     \item Que va afficher le programme, si l'heure de début est 12:00:00 (12h )?
+    
+   \pause
+    \textbf{Première : 12:00:00}\\
+    \textbf{Alarme : 12:00:02}\\
+    \textbf{Terminale : 12:00:04}\\
 \end{enumerate}
 \end{exercise}
 \end{frame}
@@ -681,18 +731,102 @@ def inconnue(n):
         n -= 1
 \end{minted}
 }
+%-------------------------------- FRAME ---------------------------------------------------
+
 \begin{frame}
 \begin{exercise}
 Notre programme possède une fonction \textbf{inconnue} qui peut prendre beaucoup de temps. Nous aimerions qu'au bout de 5s, celle-ci soit automatiquement interrompue.
 Apporter les modifications nécessaires, pour réaliser ce que l'on souhaite.
 \end{exercise}
 \begin{code}{La fonction inconnue}
-\ex
+   \parbox{10cm}{  \ex}
+\end{code}
+\end{frame}
+%-------------------------------- FRAME ---------------------------------------------------
+
+\begin{frame}{un corrigé}
+\begin{code}{ex3.py}
+    \inputminted[fontsize=\small]{Python}{ex3.py}
 \end{code}
 \end{frame}
 
 %-------------------------------- FRAME ---------------------------------------------------
+\begin{frame}
+\begin{exercise}
+Un programme attend une réponse de l'utilisateur suite à une commande \textbf{input}. On aimerait qu'au bout de 5 secondes un message s'affiche, pour demander de répondre dans les 5 prochaines secondes et si tel n'est pas le cas le programme s'interrompt.
+\end{exercise}
+\end{frame}
+%-------------------------------- FRAME ---------------------------------------------------
 
+\begin{frame}[plain]{un corrigé}
+\begin{code}{ex4.py}
+    \inputminted[fontsize=\scriptsize]{Python}{ex4.py}
+\end{code}
+\end{frame}
+%-------------------------------- FRAME ---------------------------------------------------
+\begin{frame}
+\begin{exercise}
+ Nous avons deux programmes qui permettent de communiquer entre deux personnes (ex le jeu du juste prix). Le premier programme \textbf{serveur.py} va créer le canal de communication et le client \textbf{client.py} va pouvoir s'y connecter.
+\begin{enumerate}
+    \item Lancez dans deux shells différents le serveur avec \textbf{python3 serveur.py}, puis \textbf{python3 client.py} et testez la communication.
+    \item À l'aide d' une copie d'écran avec trois shell bash (et uniquement trois sont lancés ), répondez aux questions suivantes:  
+    \includegraphics[width=0.5\linewidth]{bash_3x}
+    \begin{enumerate}
+        \item  Quel est le numéro pid du processus lié à  l'exécution de client.py ?    
+        \item Quel(s) pourrait(aient) être le pid du parent du processus à  l'exécution de client.py ?
+        \item Comment mettre fin au  processus associé serveur.py ? (donnez deux possibilités)       
+    \end{enumerate}
+    \item Tuez le serveur et continuez à envoyer des messages par le biais du client. Quelle message d'erreur apparaît? En expliquer la raison.
+    Aurait-on pu procéder différemment ?
+    \item Modifier le programme client pour que le programme prenne en considération cette erreur en demandant à l'utilisateur s'il veut continuer ou s'il veut mettre fin au programme.
+\end{enumerate}
+\end{exercise}
+
+\end{frame}
+%-------------------------------- FRAME ---------------------------------------------------
+\begin{frame}{Corrigé exercice : question 2}
+    \includegraphics[width=1\linewidth]{bash_3x}
+\begin{enumerate}
+    \item[]
+    \setcounter{enumi}{2}
+   \begin{enumerate}[<+->]
+  \item  Quel est le numéro pid du processus lié à  l'exécution de client.py ?
+    \textbf{La commande \textit{ htop}  nous indique que le pid du client.py est 11817.}
+    \item Quel(s) pourrait(aient) être le pid du parent du processus à  l'exécution de client.py ?\pause
+    \textbf{Le parent est un programme \textit{bash}, donc en utilisant les informations de  \textit{htop} on voit qu'il peut s'agir du pid 11806 ou 11792}
+    \item Comment mettre fin au  processus associé serveur.py ? (donnez deux possibilités)\pause
+\textbf{En tapant Ctrl-C, avec  la fenêtre du terminal correspondant actif, en cliquant sur la croix de la fenêtre appropriée ou en tapant dans une console kill -2 11812.}
+\end{enumerate}
+\end{enumerate}
+\end{frame}
+%-------------------------------- FRAME ---------------------------------------------------
+\begin{frame}{Corrigé exercice : question 3 }
+\begin{enumerate}
+    \setcounter{enumi}{2}
+  \item Tuez le serveur et continuez à envoyer des messages par le biais du client. Quelle message d'erreur apparaît? En expliquer la raison.
+ Aurait-on pu procéder différemment ?\pause
+   \begin{itemize}[<+->]
+     \item  \textbf{On a l'erreur suivante : BrokenPipeError: [Errno 32] Broken pipe.\\ En fermant le serveur, le canal de communication n'est plus disponible rendant impossible l'écriture des données dans le PIPE (canal, tuyau). Le programme client a reçu un signal SIGPIPE.}
+     \item  \textbf{Il n'est pas nécessaire d'arrêter le serveur pour casser le canal de communication, on peut également exécuter la commande : } 
+     kill -13 pid  (où pid est le numéro du processus à l'exécution du client).
+ \end{itemize}
+
+\end{enumerate}
+\end{frame}
+%-------------------------------- FRAME ---------------------------------------------------
+\begin{frame}{Corrigé exercice : question 4}
+ \only<1>{\begin{enumerate}[<+->]
+    \setcounter{enumi}{3}
+ \item 
+Modifier le programme client pour que le programme prenne en considération cette erreur en demandant à l'utilisateur s'il veut continuer ou s'il veut mettre fin au programme.
+\end{enumerate}
+}
+ \only<2>{
+    \begin{code}{client.py}
+        \inputminted[fontsize=\scriptsize]{Python}{client_cor.py}
+    \end{code}
+}
+\end{frame}
 \section*{Annexe}
 
 \subsection{Description du fonctionnement CTRL-Z}
@@ -744,30 +878,38 @@ La commande \textbf{Ctrl-Z } va passer le processus \textbf{cat} dans les travau
     f/.style={->,very thick,>=stealth'},%
     s/.style={draw,circle},%
     p/.style={fill=white,inner sep=3pt},scale=0.8]
+    \only<+->{
     \node[fill=pink,inner sep=10pt] (T1) at (0,0) {shell} ;
     \node[s,fill=yellow] (Proc) at (-2,-2.7) {ps} ;
     \node[s,] (FG) at (5,-3) {Proc 2} ;
     \node[s,fill=blue!8] (Cat) at (3,-3) {Proc 1} ;
     \draw(3,-4)node{\footnotesize pid:5341};
-    \node[s] (kill) at (-5,-1) {\small kill -2 5341} ;
-    \draw[->](kill)--(-3,-3)node[midway,above,rotate=-45]{signal};
+
     
     \draw[f] (T1) to  (Proc) ;
     \draw[f] (T1) -- (Cat)  ;
     \draw[f] (T1) -- (FG) ;
     \draw[dashed](-3,-2)rectangle(-1,-5)node(fg)[below]{travail de premier plan};
     \draw[dashed](2,-2)rectangle(6,-5)node[below]{travail d'arrière plan};
-    \draw(4,-7)node[text width=6.5cm](sign){Les signaux Ctrl-C et Ctrl-Z ne s'adressent qu'aux travaux de premier plan};
+}
+    \only<+->{
+            \node[s] (kill) at (-5,-1) {\small kill -2 5341} ;
+        \draw[->](kill)--(-3,-3)node[midway,above,rotate=-45]{signal};
+    }
+    \only<+->{
+    \draw(4,-6.5)node[text width=6.5cm](sign){Les signaux Ctrl-C et Ctrl-Z ne s'adressent qu'aux travaux de premier plan};
     \draw[->](sign.west) to [out=180,in=270](fg.south);
+}
     
     \end{tikzpicture}
-    
 \end{center}
-\end{frame}
+\pause
 
 La commande \textbf{killall -2 cat } n'a pas d'action sur le processus \textbf{cat}  car il ne fait partie des processus qui sont au premier plan. 
 
 \noindent À l'aide de la commande \textbf{bg} (signal SIGCONT) le processus réintègre les processus de premier plan.
+
+\end{frame}
 \begin{frame}{Description du fonctionnement CTRL-Z}
 \begin{center}
     \begin{tikzpicture}[
