@@ -1,0 +1,304 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[10pt,french,A4]{article}
+\usepackage{mathrsfs}
+\usepackage{eurosym}
+\usepackage{amsmath,amssymb,amsfonts}
+
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage{aeguill}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{array}
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage{framed}
+\usepackage[framed]{ntheorem}
+\newframedtheorem{theoreme}{Théorème}
+
+%definition
+\def\theoremframecommand#1{\vrule\hspace{6pt}\hbox{#1}}
+\setlength\theorempreskipamount{0pt}%
+\setlength\theorempostskipamount{0pt}%
+\newshadedtheorem{definition}{\protect\definitionname}
+\theoremprework{%
+    \setlength\theorempreskipamount{\topsep}%
+    \setlength\theorempostskipamount{\topsep}%
+}
+\theoremstyle{plain}
+\theorembodyfont{\upshape}
+\newtheorem*{remarque}{Remarque}
+\newframedtheorem{propriete}{Propriété}
+\newtheorem*{proof}{Preuve}
+\newtheorem*{exemple}{Exemple}
+\newtheorem{exercice}{Exercice}
+
+% Définition des environnements pour les théorèmes, proposition, etc...
+
+\providecommand{\definitionname}{Définition}
+\providecommand{\definitionname}{exemple}
+\providecommand{\definitionname}{preuve}
+\providecommand{\definitionname}{remarque}
+\providecommand{\definitionname}{propriete}
+%\providecommand{\theoremname}{Théorème}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{fourier} % math & rm
+\usepackage[scaled=0.875]{helvet} % ss
+\usepackage[normalem]{ulem}
+\usepackage{pifont}
+\usepackage[tikz]{bclogo}
+\usetikzlibrary{positioning,shapes,decorations}
+\usepackage{wrapfig}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usepackage{multicol}
+
+\setlength{\columnseprule}{0.5pt}
+\setlength{\columnsep}{20pt}
+\usepackage{smartdiagram}
+\usepackage[paperwidth=210mm,paperheight=297mm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=15mm,lmargin=2cm,rmargin=2cm,headheight=1cm,headsep=5mm,footskip=5mm}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Somme de dés},
+            pdfauthor={Pascal Malingrey, Pascal Seckinger, Patrick Thévenon},
+            pdfkeywords={NSI, HTML, CSS, Javascript},
+            pdfborder={0 0 0},
+            pdfsubject={Lancer de dés et javascript},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{xcolor}
+\usepackage[tikz]{bclogo}
+\usepackage{wrapfig}
+\usepackage{framed}
+\usepackage{algorithm}
+\usepackage{algpseudocode}%MISE EN PAGE
+
+\usepackage{listings,lipsum,listingsutf8}
+\definecolor{codegreen}{rgb}{0.1,0.47,0.1}
+\definecolor{fondjaune}{rgb}{0.99, 0.7,0.8}
+\definecolor{couleurdef}{rgb}{0.99, 0.8, 0.87}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\newenvironment{code}[1]{%
+    \begin{bclogo}[couleur=backcolour, couleurTexte=black ,couleurBord=blue ,couleurBarre=black, ombre=false,epBord=0.9,logo=\#,arrondi=0.1]{{\bfseries #1}}%
+    }%
+    {%
+    \end{bclogo}
+}%
+%---------------------------- version élève - prof
+\newboolean{Prof}
+
+\newcommand{\cacher}[1]{
+    \ifthenelse{\boolean{Prof}} % si « Professeur » est vrai,
+    {#1} %les mots cachés sont en gras
+    {\dashuline{\phantom{#1}}} % (else) sinon les mots sont remplacés par une ligne sur laquelle l'élève peut écrire. 
+}
+\newcommand{\cacherb}[1]{
+    \ifthenelse{\boolean{Prof}} % si « Professeur » est vrai,
+    {#1} %les mots cachés sont en gras
+    {\phantom{#1}} % (else) sinon les mots sont remplacés par une ligne sur laquelle l'élève peut écrire. 
+}
+%-------------------------------------------------------
+\usepackage{minted}
+\title{Mini-projet :
+\\
+Statistiques sur la somme de dés}
+\author{Pascal Malingrey, Pascal Seckinger, Patrick Thévenon}
+\date{}
+%------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\Large Projet: web}
+
+\setlength{\parindent}{0mm}
+
+\AtBeginDocument{ % Nécessaire à cause de babel
+\renewcommand\labelitemi{\textbullet}
+\renewcommand\labelitemii{\textasteriskcentered}
+\renewcommand\labelitemiii{\textperiodcentered}
+}
+
+\begin{document}
+
+\maketitle
+\begin{center}
+\fbox{
+    \begin{minipage}[c]{15cm}
+        Cette activité se destine aux élèves de 1ère après avoir étudié, le langage HTML et le CSS, ainsi que les bases du Javascript.
+        
+        
+        Les compétences visées dans cette activité sont ambitieuses pour la plupart des élèves.
+        Il faudra moduler les lignes de code de la partie javascript à donner  aux élèves en fonction du public visé.
+    \end{minipage}
+}
+\end{center}
+
+
+\newpage
+\section{Présentation générale}
+
+\begin{bclogo}{L'énoncé}
+Le but du projet est d'obtenir une page web dynamique dont une vue est donnée ci-dessous.
+
+L'utilisateur choisit un nombre de dés et un nombre de lancers.
+En cliquant sur un bouton, la page devra donner la distribution en fréquence de la somme des dés et le diagramme en bâtons associés.
+
+En cliquant à nouveau sur le bouton, les données statistiques \textbf{doivent être actualisées}.
+\end{bclogo}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{vue_page}
+    \caption{}
+    \label{fig:vuepage}
+\end{figure}
+
+\section{Contenu attendu}
+
+\subsection{Code HTML}
+Le fichier HTML devra contenir les éléments suivants :
+\begin{enumerate}
+    \item Le titre de la page.
+    \item Une petite description de l'application.
+    \item Un formulaire contenant :
+    \begin{enumerate}
+        \item un volet déroulant permettant de spécifier le nombre de dés à lancer (entre 1 et 7).
+        \item une zone de texte permettant de spécifier le nombre de lancers.
+    \end{enumerate}
+    \item Un bouton qui permettra de lancer les dés.
+    \item Un canvas de dimension 800px par 200px qui contiendra le diagramme des fréquences. 
+    \item Un tableau à trois colonnes, une pour les différentes sommes obtenues, une pour les effectifs et une pour les fréquences.
+    \item Deux conteneurs, un pour le tableau et un pour le reste de la page.
+\end{enumerate}
+\textbf{Note} Pour la suite (CSS et Javascript), vous aurez besoin d'accéder à la plupart (si ce n'est tous) les
+éléments HTML que vous allez créer ici : assignez leur tous des identifiants !
+
+\subsection{code CSS}
+Le style, décrit dans un fichier style.css, doit contenir au minimum les propriétés suivantes :
+\begin{itemize}
+    \item Le tableau doit être centré sur la page.
+    \item Les couleurs des lignes du tableaux des fréquences doivent alterner. 
+    \item Vous n'avez droit qu'à une seule image pour représenter les dés (\textit{voir sprites}).
+    \item La zone dans laquelle les dés sont représentés doit être mise en valeur.
+\end{itemize}
+
+\subsection{code Javascript}
+
+Le fichier Script.js dont le code est recopié plus loin sera à compléter.
+Il contient déjà quelques fonctions totalement définies :
+\begin{itemize}
+	\item de() permet d'obtenir le résultat d'un dé
+	\item stat() permet de mettre à jour les variables somme et freq, qui sont des tableaux associatifs, contenant respectivement les effectifs et les fréquences des différentes sommes obtenues ;
+\end{itemize}
+
+Le code est à compléter pour contenir les fonctions nécessaires aux tâches à accomplir :
+
+\begin{enumerate}
+	\item Une fonction qui (re)trace le diagramme en bâton dans le canvas défini dans le code HTML.
+	
+	Voir par exemple ce \href{https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D}{lien} pour la gestion des canvas.
+	\item Une fonction qui modifie le DOM en (re)créant les lignes du contenu du tableau de statistiques.
+	\item La fonction exécutée lorsque l'on clique sur le bouton qui :
+	\begin{enumerate}
+		\item récupère le nombre de dés et le nombre de lancers ;
+		\item réinitialise les sommes et les fréquences si le nombre de dés a changé ;
+		\item effectue les lancers en mettant à jour les sommes ;
+		\item met à jour les fréquences ;
+		\item retrace le diagramme et refait le tableau ;
+		\item affiche le résultat du dernier lancer (et cache les dés inutiles).
+		
+		Pour cela, utiliser des changements de classes avec la méthode setAttribute.
+	\end{enumerate}
+\end{enumerate}
+
+\newpage
+
+{\bfseries Contenu du fichier Script.js :}
+
+\begin{minted}{js}
+// Récupération des éléments utiles du document html
+// ...
+
+// Variables partagées par les différentes fonctions du script
+var couleur = ["#70CCC3","#26998D", "#A6FFC4","#FF66A5","#CC70C4"]; // couleurs du diagramme
+var sommes= {};
+var freq = {};
+/// ...
+
+function de(){ // Donne le résultat d’un lancer de dé,
+               // soit un nombre aléatoire entre 1 et 6
+    return  Math.floor(Math.random() * 6) + 1 ;
+  };
+
+function stat(){ // Calcul les fréquences
+    T = 0 ;
+    for(i in sommes){
+      T += sommes[i] ;
+    } // T est l'effectif total
+    for(i in sommes){
+      freq[i] = sommes[i]/T ;
+    }
+  };
+
+// Affiche un graphique
+function graphe(){
+    var canvas ... // element de la page dans laquelle se fait le dessin
+    var parent = document.getElementById('main');
+    canvas.width = parent.clientWidth - 20;
+    var ctx = canvas.getContext('2d');
+    // (Ré)initialisation du graphique
+    // ...
+    // Calcul de M, maximum des fréquences
+    // ...
+    index = 0;
+    // Affichage des rectangles du diagramme en bâtons
+    // Affichage de la somme associée
+    // ...
+
+};
+
+// Affiche les résultats dans le tableau selon les fréquences
+function aff(){
+  // ...
+};
+
+// lance les dés et met à jour les données
+function lance_des(){
+    var S = 0; // somme des dés du lancer
+    res = []; // garde la liste des résultats des dés pour l'affichage du dernier lancer
+    for (i = 0 ; i< demax; i++ ){
+      // lancer un dé, mise à jour des variables
+      // ...
+    };
+    // mise à jour de la variable sommes
+    // ...
+};
+
+// fonction appelée après avoir cliqué sur lancer
+function jet_des(){
+    ancien = demax;
+    rep = parseInt(document.getElementById('rep').value);
+    // récuperation de la valeur d'une liste 
+    demax = parseInt(listenb.options[listenb.selectedIndex].value);
+
+    // Vérifier si le nombre de dés a changé, et remettre à zéro les donnés si c’est le cas
+    // ...
+    // lancer les dés puis afficher le dernier résultat
+    // ...
+    // Calcule les statistiques, affiche le tableau puis le graphique
+    // ...
+};
+
+// Association du bouton à la fonction
+// ...
+\end{minted}
+
+\end{document}

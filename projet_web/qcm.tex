@@ -1,0 +1,132 @@
+\documentclass[]{scrartcl}
+
+\usepackage{eurosym}
+\usepackage{amsmath,amssymb,amsfonts}
+
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{aeguill}
+\usepackage{hyperref}
+\usepackage{fourier} % math & rm
+\usepackage[scaled=0.875]{helvet} % ss
+\usepackage[normalem]{ulem}
+\usepackage{pifont}
+\usepackage{minted}
+\title{Q.C.M}
+\author{ Pascal Malingrey, Pascal Seckinger, Patrick Th\'evenon}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section*{QCM - énoncé}
+\begin{enumerate}
+    \item Quel est le tag à utiliser pour créer un dessin dans une page web?
+    \begin{enumerate}
+      \item \verb?<figure> </figure>?
+      \item \verb?<graph> </graph>?
+      \item \verb?<img> </img>?
+      \item \verb?<canvas> </canvas>?
+    \end{enumerate}
+    \item Quel est l'intérêt du \textbf{sprite} dans la programmation Web?
+    \begin{enumerate}
+      \item D'être une boisson rafraîchissante.
+      \item De couper une page HTML en deux.
+      \item De découper une image en plusieurs parties
+      \item De charger une seule image formée de plusieurs morceaux afin de réduire la taille en octet.
+    \end{enumerate}
+    \item Pour centrer un \textbf{div} dont la classe est \textbf{mb} dans son conteneur on utilise :
+    \begin{enumerate}
+      \item \mintinline{html}{<center><div class='mb'>...</div></center>}
+      \item \mintinline{css}{.mb{margin:auto; width:80%}}
+      \item \mintinline{css}{.mb{text-align:center}}
+      \item \mintinline{css}{.mb{padding:auto; width:80%}}
+    \end{enumerate}
+    \item On veut récupérer tous les éléments d'une liste
+    
+    \mintinline{html}{<ul id="serie"><li></li>...<li></li></ul>}
+    
+    en javascript, quelle est la bonne instruction parmi les suivantes ?
+    \begin{enumerate}
+      \item \mintinline{js}{liste = document.getElementById("serie")}
+      \item \mintinline{js}{liste = document.getElementsById("li")}
+      \item \mintinline{js}{liste = document.getElementById("serie").getElementsByTagName('li')}
+      \item \mintinline{js}{liste = document.getElementsByTagName('li')}
+    \end{enumerate}
+    \item Pour parcourir un tableau associatif \textbf{somme} en javascript, on utilise :
+    \begin{enumerate}
+      \item \mintinline{js}{somme = {}; for (i in somme){...} }
+      \item \mintinline{js}{somme = []; for (i in somme){...} }
+      \item \mintinline{js}{somme = []; for (i in somme.length)){...} }
+      \item \mintinline{js}{somme = {}; for (i in somme.length)){...} }
+    \end{enumerate}
+ \item On considère un \textbf{div} dont l'id est \textbf{donnees}. On récupère le noeud du DOM par la commande \mintinline{js}{corps = document.getElementById('donnees')}. Pour ajouter du texte à cet élément on va écrire :
+    \begin{enumerate}
+      \item \mintinline{js}{corps.HTML += "mon texte à ajouter"}
+      \item \mintinline{js}{corps += "mon texte à ajouter"}
+      \item \mintinline{js}{corps.innerHTML += "mon texte à ajouter"}
+      \item \mintinline{js}{corps.outerHTML += "mon texte à ajouter"}
+    \end{enumerate}
+\end{enumerate}
+\newpage
+\section*{QCM - corrigé}
+
+\begin{enumerate}
+    \item Quel est le tag à utiliser pour créer un dessin dans une page web?
+    \begin{enumerate}
+        \item \verb?<figure> </figure>?\\ \textit{La balise n'existe pas.}
+        \item \verb?<graph> </graph>?\\ \textit{La balise n'existe pas.}
+        \item \verb?<img> </img>? \\ \textit{La balise  permet d'insérer une image (attention il s'agit en principe d'une balise auto-fermante).}
+        \item \verb?<canvas> </canvas>?: \\ \textbf{bonne réponse}
+    \end{enumerate}
+    \item Quel est l'intérêt du \textbf{sprite} dans la programmation Web?
+    \begin{enumerate}
+        \item D'être une boisson rafraîchissante. \\ \textit{ la marque existe mais sans intérêt ici.}
+        \item De couper une page HTML en deux. \\ \textit{plusieurs balises permettent de séparer la page en partie, par exemple div, aside...}
+        \item De découper une image en plusieurs parties.\\ \textit{C'est un peu l'inverse.}
+        \item De charger une seule image formée de plusieurs morceaux afin de réduire la taille en octet.\\ \textbf{bonne réponse}, \textit{l'intérêt est exprimé dans la question. On utilise après background-position pour délimiter la zone qui nous intéresse.}
+    \end{enumerate}
+    \item Pour centrer un \textbf{div} dont la classe est \textbf{mb} dans son conteneur on utilise :
+    \begin{enumerate}
+        \item \mintinline{html}{<center><div class='mb'>...</div></center>}\\
+         \textbf{bonne réponse }, \textit{mais elle est dépréciée en  HTML4 (et XHTML 1) .}
+        \item \mintinline{css}{.mb{margin:auto; width:80%}} \\
+                 \textbf{bonne réponse }, la marge sera de 10% de par et d'autre.
+                \item \mintinline{css}{.mb{text-align:center}} \\
+                \textit{Ici c'est le texte à l'intérieur qui est centré.}
+                \item \mintinline{css}{.mb{padding:auto; width:80%}} \\
+                      \textit{Le bloc va prendre 80\% mais aucune indication n'est donnée sur son alignement. }
+                    \end{enumerate}
+                    \item On veut récupérer tous les éléments d'une liste        
+                    \mintinline{html}{<ul id="serie"><li></li>...<li></li></ul>}
+                    
+                    en javascript, quelle est la bonne instruction parmi les suivantes ?
+                    \begin{enumerate}
+                        \item \mintinline{js}{liste = document.getElementById("serie")}\\
+                        \textit{ On récupère le noeud ul.}
+                        \item \mintinline{js}{liste = document.getElementsById("li")}\\ \textit{On récupère un élèment s'il existe dont l'id est li.}
+                        \item \mintinline{js}{liste = document.getElementById("serie").getElementsByTagName('li')}\\ \textbf{bonne réponse}
+                        \item \mintinline{js}{liste = document.getElementsByTagName('li')} \\ \textit{ On récupère tous les li (item d'une liste) de la page et pas uniquement ceux de la liste serie.}
+                    \end{enumerate}
+                    \item Pour parcourir un tableau associatif \textbf{somme} en javascript, on utilise :
+                    \begin{enumerate}
+                        \item \mintinline{js}{somme = {}; for (i in somme){...} } \\ \textbf{bonne réponse}
+                        \item \mintinline{js}{somme = []; for (i in somme){...} } \\  \textit{Ici somme est tableau qui n'est pas associatif}
+                        \item \mintinline{js}{somme = []; for (i in somme.length)){...} }\\  \textit{somme.length est la longueur de la liste, donc i in somme.length n'a pas de sens.}
+                        \item \mintinline{js}{somme = {}; for (i in somme.length)){...} } \\ \textit{même remarque que précédemment.}
+                    \end{enumerate}
+                    \item On considère un \textbf{div} dont l'id est \textbf{donnees}. On récupère le noeud du DOM par la commande \mintinline{js}{corps = document.getElementById('donnees')}. Pour ajouter du texte à cet élément on va écrire :
+                    \begin{enumerate}
+                        \item \mintinline{js}{corps.HTML += "mon texte à ajouter"} \\\textit{ la méthode HTML n'existe pas.}
+                        \item \mintinline{js}{corps += "mon texte à ajouter"} \\  \textit{corps est un objet qui n'est pas un string, donc on ne peut ajouter un string à cet objet.}
+                        \item \mintinline{js}{corps.innerHTML += "mon texte à ajouter"} \textbf{bonne réponse}
+                        \item \mintinline{js}{corps.outerHTML += "mon texte à ajouter"} \\ \textit{outerHTML prend en compte également la balise div, elle est devenue obsolète et n'est pas acceptée par tous les navigateurs.}
+                    \end{enumerate}
+                \end{enumerate}
+            
+
+\end{document}
