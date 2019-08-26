@@ -1,0 +1,3 @@
+Le lien vers openclassroom : https://openclassrooms.com/fr/courses/4011851-initiez-vous-au-machine-learning/4022441-tp-entrainez-le-modele-des-k-plus-proches-voisins-k-nn
+
+Lien vers le TP de l'université de Lille donné dans moodle : http://www.grappa.univ-lille3.fr/~ppreux/ensg/miashs/l3-ap/tps/kppv/

@@ -10,7 +10,7 @@
   min-width: 640px;
   margin:auto;
   margin-top: 0;
-  padding: 1em;
+  padding: 10px;
   background-color: #fff;
 }
 body{background-color: #ececec;padding: 0}
@@ -53,12 +53,11 @@ td{text-align: center;}
 tr:nth-child(odd){
 background-color:#EEE;
 }
-
 tr:nth-child(even){
 background-color:#CCC;
 }
 #graphe{
-  width:640px%;height: 300px;
+  width:100%;
   background-color: #FFF;
   margin:auto;
 }
