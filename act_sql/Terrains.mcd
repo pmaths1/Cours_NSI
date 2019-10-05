@@ -1,0 +1,7 @@
+PERIODE: id_reserv,date début, date fin
+RESERVATIONS, 2n MEMBRES, n1 TERRAIN, 11 PERIODE : _id, id_joueur, id_partenaire, date_reserv, id_terrain
+TERRAIN: id_terrain, nom,heure_deb,heure_fin,decalage,praticable
+
+ADMINISTRATIONS, 01 MEMBRES:_id, id_membre, multiple, annuler, reserver
+MEMBRES: id_membre,nom_p,date_naissance,sexe, courriel,date_validite
+RENSEIGNEMENTS, 01 MEMBRES:id_membre, reglages, classement, licence

@@ -1,0 +1,31 @@
+\documentclass[twocolumn,french]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[paperwidth=29cm,paperheight=21cm]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=1.5cm,lmargin=1cm,rmargin=1cm,headheight=1cm,headsep=0.8cm,footskip=1cm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tkz-tab}
+
+\usepackage[normalem]{ulem}
+\newenvironment{mld}
+  {\par\begin{minipage}{\linewidth}\begin{tabular}{rp{0.7\linewidth}}}
+  {\end{tabular}\end{minipage}\par}
+\newcommand{\relat}[1]{\textsc{#1}}
+\newcommand{\attr}[1]{\emph{#1}}
+\newcommand{\prim}[1]{\uline{#1}}
+\newcommand{\foreign}[1]{\#\textsl{#1}}
+
+\begin{document}
+
+\begin{mld}
+  Periode & (\prim{id\_reserv}, \attr{date début}, \attr{date fin}, \foreign{id\_membre}, \foreign{id\_terrain}, \attr{\_id}, \attr{id\_joueur}, \attr{id\_partenaire}, \attr{date\_reserv}, \attr{id\_terrain.1})\\
+  Terrain & (\prim{id\_terrain}, \attr{nom}, \attr{heure\_deb}, \attr{heure\_fin}, \attr{decalage}, \attr{praticable})\\
+  Membres & (\prim{id\_membre}, \attr{nom\_p}, \attr{date\_naissance}, \attr{sexe}, \attr{courriel}, \attr{date\_validite}, \attr{\_id}, \attr{id\_membre.1}, \attr{multiple}, \attr{annuler}, \attr{reserver}, \attr{id\_membre.2}, \attr{reglages}, \attr{classement}, \attr{licence})\\
+\end{mld}
+\end{document}

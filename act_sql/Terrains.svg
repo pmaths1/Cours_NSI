@@ -1,0 +1,112 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="486" height="318" view_box="0 0 486 318"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:link="http://www.w3.org/1999/xlink">\n\n<desc>Généré par Mocodo 2.3.7 le ven., 04 oct. 2019 20:00:14</desc>
+
+<rect id="frame" x="0" y="0" width="486" height="318" fill="#f7f7f7" stroke="none" stroke-width="0"/>
+
+<!-- Association RESERVATIONS -->
+<line x1="243" y1="238" x2="243" y2="80" stroke="#e08214" stroke-width="1"/>
+<text x="248.0" y="159" fill="#542788" font-family="Verdana" font-size="12">2,n</text>
+<line x1="403" y1="80" x2="243" y2="80" stroke="#e08214" stroke-width="1"/>
+<text x="338" y="97.0" fill="#542788" font-family="Verdana" font-size="12">1,n</text>
+<line x1="83" y1="80" x2="243" y2="80" stroke="#e08214" stroke-width="1"/>
+<text x="127" y="97.0" fill="#542788" font-family="Verdana" font-size="12">1,1</text>
+<g id="association-RESERVATIONS">
+	<path d="M 291 18 a 14 14 90 0 1 14 14 V 44 h -124 V 32 a 14 14 90 0 1 14 -14" fill="#fdb863" stroke="#fdb863" stroke-width="0"/>
+	<path d="M 305 44.0 v 84 a 14 14 90 0 1 -14 14 H 195 a 14 14 90 0 1 -14 -14 V 44.0 H 124" fill="#fee0b6" stroke="#fee0b6" stroke-width="0"/>
+	<rect x="181" y="18" width="124" height="124" fill="none" rx="14" stroke="#e08214" stroke-width="1.5"/>
+	<line x1="181" y1="44" x2="305" y2="44" stroke="#e08214" stroke-width="1"/>
+	<text x="188" y="36.6" fill="#000000" font-family="Georgia" font-size="14">RESERVATIONS</text>
+	<text x="188" y="62.6" fill="#000000" font-family="Georgia" font-size="14">_id</text>
+	<text x="188" y="80.6" fill="#000000" font-family="Georgia" font-size="14">id_joueur</text>
+	<text x="188" y="98.6" fill="#000000" font-family="Georgia" font-size="14">id_partenaire</text>
+	<text x="188" y="116.6" fill="#000000" font-family="Georgia" font-size="14">date_reserv</text>
+	<text x="188" y="134.6" fill="#000000" font-family="Georgia" font-size="14">id_terrain</text>
+</g>
+
+<!-- Association ADMINISTRATIONS -->
+<line x1="243" y1="238" x2="83" y2="238" stroke="#e08214" stroke-width="1"/>
+<text x="163" y="255.0" fill="#542788" font-family="Verdana" font-size="12">0,1</text>
+<g id="association-ADMINISTRATIONS">
+	<path d="M 143 176 a 14 14 90 0 1 14 14 V 202 h -148 V 190 a 14 14 90 0 1 14 -14" fill="#fdb863" stroke="#fdb863" stroke-width="0"/>
+	<path d="M 157 202.0 v 84 a 14 14 90 0 1 -14 14 H 23 a 14 14 90 0 1 -14 -14 V 202.0 H 148" fill="#fee0b6" stroke="#fee0b6" stroke-width="0"/>
+	<rect x="9" y="176" width="148" height="124" fill="none" rx="14" stroke="#e08214" stroke-width="1.5"/>
+	<line x1="9" y1="202" x2="157" y2="202" stroke="#e08214" stroke-width="1"/>
+	<text x="16" y="194.6" fill="#000000" font-family="Georgia" font-size="14">ADMINISTRATIONS</text>
+	<text x="16" y="220.6" fill="#000000" font-family="Georgia" font-size="14">_id</text>
+	<text x="16" y="238.6" fill="#000000" font-family="Georgia" font-size="14">id_membre</text>
+	<text x="16" y="256.6" fill="#000000" font-family="Georgia" font-size="14">multiple</text>
+	<text x="16" y="274.6" fill="#000000" font-family="Georgia" font-size="14">annuler</text>
+	<text x="16" y="292.6" fill="#000000" font-family="Georgia" font-size="14">reserver</text>
+</g>
+
+<!-- Association RENSEIGNEMENTS -->
+<line x1="243" y1="238" x2="403" y2="238" stroke="#e08214" stroke-width="1"/>
+<text x="302" y="255.0" fill="#542788" font-family="Verdana" font-size="12">0,1</text>
+<g id="association-RENSEIGNEMENTS">
+	<path d="M 463 185 a 14 14 90 0 1 14 14 V 211 h -148 V 199 a 14 14 90 0 1 14 -14" fill="#fdb863" stroke="#fdb863" stroke-width="0"/>
+	<path d="M 477 211.0 v 66 a 14 14 90 0 1 -14 14 H 343 a 14 14 90 0 1 -14 -14 V 211.0 H 148" fill="#fee0b6" stroke="#fee0b6" stroke-width="0"/>
+	<rect x="329" y="185" width="148" height="106" fill="none" rx="14" stroke="#e08214" stroke-width="1.5"/>
+	<line x1="329" y1="211" x2="477" y2="211" stroke="#e08214" stroke-width="1"/>
+	<text x="336" y="203.6" fill="#000000" font-family="Georgia" font-size="14">RENSEIGNEMENTS</text>
+	<text x="336" y="229.6" fill="#000000" font-family="Georgia" font-size="14">id_membre</text>
+	<text x="336" y="247.6" fill="#000000" font-family="Georgia" font-size="14">reglages</text>
+	<text x="336" y="265.6" fill="#000000" font-family="Georgia" font-size="14">classement</text>
+	<text x="336" y="283.6" fill="#000000" font-family="Georgia" font-size="14">licence</text>
+</g>
+
+<!-- Entity MEMBRES -->
+<g id="entity-MEMBRES">
+	<g id="frame-MEMBRES">
+		<rect x="189" y="167" width="108" height="26" fill="#b2abd2" stroke="#b2abd2" stroke-width="0"/>
+		<rect x="189" y="193.0" width="108" height="116" fill="#d8daeb" stroke="#d8daeb" stroke-width="0"/>
+		<rect x="189" y="167" width="108" height="142" fill="none" stroke="#8073ac" stroke-width="1.5"/>
+		<line x1="189" y1="193" x2="297" y2="193" stroke="#8073ac" stroke-width="1"/>
+	</g>
+	<text x="207" y="185.6" fill="#000000" font-family="Georgia" font-size="14">MEMBRES</text>
+	<text x="194" y="211.6" fill="#000000" font-family="Georgia" font-size="14">id_membre</text>
+	<line x1="194" y1="214.0" x2="268" y2="214.0" stroke="#000000" stroke-width="1"/>
+	<text x="194" y="229.6" fill="#000000" font-family="Georgia" font-size="14">nom_p</text>
+	<text x="194" y="247.6" fill="#000000" font-family="Georgia" font-size="14">date_naissance</text>
+	<text x="194" y="265.6" fill="#000000" font-family="Georgia" font-size="14">sexe</text>
+	<text x="194" y="283.6" fill="#000000" font-family="Georgia" font-size="14">courriel</text>
+	<text x="194" y="301.6" fill="#000000" font-family="Georgia" font-size="14">date_validite</text>
+</g>
+
+<!-- Entity PERIODE -->
+<g id="entity-PERIODE">
+	<g id="frame-PERIODE">
+		<rect x="44" y="36" width="78" height="26" fill="#b2abd2" stroke="#b2abd2" stroke-width="0"/>
+		<rect x="44" y="62.0" width="78" height="62" fill="#d8daeb" stroke="#d8daeb" stroke-width="0"/>
+		<rect x="44" y="36" width="78" height="88" fill="none" stroke="#8073ac" stroke-width="1.5"/>
+		<line x1="44" y1="62" x2="122" y2="62" stroke="#8073ac" stroke-width="1"/>
+	</g>
+	<text x="51" y="54.6" fill="#000000" font-family="Georgia" font-size="14">PERIODE</text>
+	<text x="49" y="80.6" fill="#000000" font-family="Georgia" font-size="14">id_reserv</text>
+	<line x1="49" y1="83.0" x2="109" y2="83.0" stroke="#000000" stroke-width="1"/>
+	<text x="49" y="98.6" fill="#000000" font-family="Georgia" font-size="14">date début</text>
+	<text x="49" y="116.6" fill="#000000" font-family="Georgia" font-size="14">date fin</text>
+</g>
+
+<!-- Entity TERRAIN -->
+<g id="entity-TERRAIN">
+	<g id="frame-TERRAIN">
+		<rect x="364" y="9" width="78" height="26" fill="#b2abd2" stroke="#b2abd2" stroke-width="0"/>
+		<rect x="364" y="35.0" width="78" height="116" fill="#d8daeb" stroke="#d8daeb" stroke-width="0"/>
+		<rect x="364" y="9" width="78" height="142" fill="none" stroke="#8073ac" stroke-width="1.5"/>
+		<line x1="364" y1="35" x2="442" y2="35" stroke="#8073ac" stroke-width="1"/>
+	</g>
+	<text x="371" y="27.6" fill="#000000" font-family="Georgia" font-size="14">TERRAIN</text>
+	<text x="369" y="53.6" fill="#000000" font-family="Georgia" font-size="14">id_terrain</text>
+	<line x1="369" y1="56.0" x2="434" y2="56.0" stroke="#000000" stroke-width="1"/>
+	<text x="369" y="71.6" fill="#000000" font-family="Georgia" font-size="14">nom</text>
+	<text x="369" y="89.6" fill="#000000" font-family="Georgia" font-size="14">heure_deb</text>
+	<text x="369" y="107.6" fill="#000000" font-family="Georgia" font-size="14">heure_fin</text>
+	<text x="369" y="125.6" fill="#000000" font-family="Georgia" font-size="14">decalage</text>
+	<text x="369" y="143.6" fill="#000000" font-family="Georgia" font-size="14">praticable</text>
+</g>
+</svg>
